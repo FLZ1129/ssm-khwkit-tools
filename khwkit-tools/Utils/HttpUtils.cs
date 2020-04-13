@@ -15,8 +15,11 @@ namespace CrazySharp.Std
 {
     public class BaseHttpResponse
     {
+        [JsonIgnore]
         public int HttpStatusCode { get; set; } = 200;
+        [JsonIgnore]
         public string HttpResponse { get; set; }
+        [JsonIgnore]
         protected bool IsSuccessStatusCode => HttpStatusCode >= 200 && HttpStatusCode <= 209;
     }
     /// <summary>

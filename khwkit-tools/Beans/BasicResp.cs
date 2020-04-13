@@ -9,9 +9,8 @@ namespace khwkit_tools.Beans
         public int Code { get; set; }
         [JsonProperty("message")]
         public string Message { get; set; }
-
         public T Data { get; set; }
-
+        [JsonIgnore]
         public bool Ok => IsSuccessStatusCode && (Code == 0);
 
         [JsonIgnore]

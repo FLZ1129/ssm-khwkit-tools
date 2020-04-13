@@ -2,11 +2,30 @@
 using CrazySharp.Base;
 using System.Drawing;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CrazySharp.Std
 {
     public static class Defaults
     {
+        public static void UseDefaultJsonSetting()
+        {
+            JsonSerializerSettings setting = new JsonSerializerSettings();
+            JsonConvert.DefaultSettings = new Func<JsonSerializerSettings>(() =>
+            {
+                //日期类型默认格式化处理
+                setting.DateFormatHandling = DateFormatHandling.MicrosoftDateFormat;
+                setting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                // 忽略循环引用
+                setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //使用驼峰
+                setting.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                //忽略空值
+                setting.NullValueHandling = NullValueHandling.Ignore;
+                return setting;
+            });
+        }
         /// <summary>
         /// 默认的窗体样式
         /// </summary>
