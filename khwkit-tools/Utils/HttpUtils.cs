@@ -27,7 +27,7 @@ namespace CrazySharp.Std
     public static class HttpUtils
     {
         // ReSharper disable once InconsistentNaming
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        public static Logger logger = LogManager.GetCurrentClassLogger();
 
         private static readonly WebRequestHandler GWebHandler = new WebRequestHandler()
         {
