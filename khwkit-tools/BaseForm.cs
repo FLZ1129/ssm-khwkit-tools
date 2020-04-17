@@ -56,6 +56,7 @@ namespace CrazySharp.Base
             Activated += FormResumeDetails;
             Deactivate += FormPauseDetails;
             FormClosed += FormClosedDetails;
+            Icon = global::khwkit_tools.Properties.Resources.khwkit_tools;
         }
 
         private void FormLoadDetails(object sender, EventArgs e) {

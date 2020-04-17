@@ -34,6 +34,7 @@ namespace khwkit_tools
         }
         protected override void OnCreate()
         {
+            this.Text = $"自助机外设服务配置工具-V{ Application.ProductVersion}";
             Defaults.UseDefaultJsonSetting();
             //初始化formLogger
             formLogger = initLogger(this, this.rtbInfoOut);
