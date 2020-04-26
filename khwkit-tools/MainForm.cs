@@ -254,7 +254,7 @@ namespace khwkit_tools
             formLogger.Info($"【状态检测-{service.FriendlyName()}】......");
             // var pb = this.ShowProgress($"正在检测'{service.FriendlyName()}'状态信息 ......");
             var resp = await HttpUtils.SendHttpGet<BasicResp<KitHeathState>>($"{baseUrl}/{service.ApiPathStr()}/check");
-            if (!OutRespLog("【状态检测-{service.FriendlyName()}】", resp))
+            if (!OutRespLog($"【状态检测-{service.FriendlyName()}】", resp))
             {
                 return;
             }
@@ -982,7 +982,7 @@ namespace khwkit_tools
             }
             formLogger.Info("【扫描二维码】...");
             // var pb = this.ShowProgress("扫描二维码......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseurl}/{KitServices.QRScanner.ApiPathStr()}/scan?timeoutSec={timeout}",new JsonObject());
+            var resp = await HttpUtils.SendHttpGet<BasicResp<QRCode>>($"{baseurl}/{KitServices.QRScanner.ApiPathStr()}/scan?timeoutSec={timeout}");
             // pb.Done();
             OutRespLog("【扫描二维码】", resp);
             tpQRScannerQrContent.Text = resp?.Data?.QRCodeContent; 
