@@ -191,6 +191,14 @@
             this.label28 = new System.Windows.Forms.Label();
             this.tpPSB = new System.Windows.Forms.TabPage();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.tpPSBTimeStayOut = new System.Windows.Forms.DateTimePicker();
+            this.label58 = new System.Windows.Forms.Label();
+            this.tpPSBTxStayIDNo = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.tpPSBTxStayRoom = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.tpPSBBtnStay = new System.Windows.Forms.Button();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.tpPSBTxSwapNewRoom = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
@@ -249,14 +257,8 @@
             this.label33 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rtbInfoOut = new System.Windows.Forms.RichTextBox();
-            this.groupBox23 = new System.Windows.Forms.GroupBox();
-            this.tpPSBTxStayIDNo = new System.Windows.Forms.TextBox();
-            this.label59 = new System.Windows.Forms.Label();
-            this.tpPSBTxStayRoom = new System.Windows.Forms.TextBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.tpPSBBtnStay = new System.Windows.Forms.Button();
-            this.tpPSBTimeStayOut = new System.Windows.Forms.DateTimePicker();
-            this.label58 = new System.Windows.Forms.Label();
+            this.tpCardBoxBtnCancelBack = new System.Windows.Forms.Button();
+            this.tpRoomBtnCancelBackAndRead = new System.Windows.Forms.Button();
             this.gbSummary.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabCtl.SuspendLayout();
@@ -294,13 +296,13 @@
             this.panel5.SuspendLayout();
             this.tpPSB.SuspendLayout();
             this.groupBox17.SuspendLayout();
+            this.groupBox23.SuspendLayout();
             this.groupBox22.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.groupBox18.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.panel9.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox23.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSummary
@@ -836,7 +838,7 @@
             this.tpIDReader.Location = new System.Drawing.Point(4, 44);
             this.tpIDReader.Name = "tpIDReader";
             this.tpIDReader.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIDReader.Size = new System.Drawing.Size(981, 450);
+            this.tpIDReader.Size = new System.Drawing.Size(981, 447);
             this.tpIDReader.TabIndex = 1;
             this.tpIDReader.Text = "身份证阅读器";
             this.tpIDReader.UseVisualStyleBackColor = true;
@@ -849,7 +851,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(339, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(639, 375);
+            this.groupBox1.Size = new System.Drawing.Size(639, 372);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能测试";
@@ -929,7 +931,7 @@
             this.tpIDReaderGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpIDReaderGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpIDReaderGbProps.Name = "tpIDReaderGbProps";
-            this.tpIDReaderGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpIDReaderGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpIDReaderGbProps.TabIndex = 9;
             this.tpIDReaderGbProps.TabStop = false;
             this.tpIDReaderGbProps.Text = "参数";
@@ -940,7 +942,7 @@
             this.tpIDReaderPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpIDReaderPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpIDReaderPanelProps.Name = "tpIDReaderPanelProps";
-            this.tpIDReaderPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpIDReaderPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpIDReaderPanelProps.TabIndex = 1;
             // 
             // panel1
@@ -1049,6 +1051,7 @@
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.tpCardBoxBtnCancelBack);
             this.groupBox10.Controls.Add(this.tpCardBoxBtnCheckCardAtRW);
             this.groupBox10.Controls.Add(this.tpCardBoxBtnCheckCardAtTake);
             this.groupBox10.Controls.Add(this.tpCardBoxBtnBackToRead);
@@ -1089,7 +1092,7 @@
             // 
             this.tpCardBoxBtnBackToRead.Location = new System.Drawing.Point(13, 126);
             this.tpCardBoxBtnBackToRead.Name = "tpCardBoxBtnBackToRead";
-            this.tpCardBoxBtnBackToRead.Size = new System.Drawing.Size(201, 36);
+            this.tpCardBoxBtnBackToRead.Size = new System.Drawing.Size(129, 36);
             this.tpCardBoxBtnBackToRead.TabIndex = 22;
             this.tpCardBoxBtnBackToRead.Text = "收卡到读卡位";
             this.tpCardBoxBtnBackToRead.UseVisualStyleBackColor = true;
@@ -1097,9 +1100,9 @@
             // 
             // tpCardBoxBtnBackToBox
             // 
-            this.tpCardBoxBtnBackToBox.Location = new System.Drawing.Point(313, 126);
+            this.tpCardBoxBtnBackToBox.Location = new System.Drawing.Point(198, 126);
             this.tpCardBoxBtnBackToBox.Name = "tpCardBoxBtnBackToBox";
-            this.tpCardBoxBtnBackToBox.Size = new System.Drawing.Size(199, 36);
+            this.tpCardBoxBtnBackToBox.Size = new System.Drawing.Size(129, 36);
             this.tpCardBoxBtnBackToBox.TabIndex = 23;
             this.tpCardBoxBtnBackToBox.Text = "收卡到卡箱";
             this.tpCardBoxBtnBackToBox.UseVisualStyleBackColor = true;
@@ -1277,7 +1280,7 @@
             this.tpPrinter.Location = new System.Drawing.Point(4, 44);
             this.tpPrinter.Name = "tpPrinter";
             this.tpPrinter.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPrinter.Size = new System.Drawing.Size(981, 450);
+            this.tpPrinter.Size = new System.Drawing.Size(981, 447);
             this.tpPrinter.TabIndex = 3;
             this.tpPrinter.Text = "小票打印机";
             this.tpPrinter.UseVisualStyleBackColor = true;
@@ -1290,7 +1293,7 @@
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox11.Location = new System.Drawing.Point(339, 72);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(639, 375);
+            this.groupBox11.Size = new System.Drawing.Size(639, 372);
             this.groupBox11.TabIndex = 14;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "功能测试";
@@ -1349,7 +1352,7 @@
             this.tpPrinterGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpPrinterGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpPrinterGbProps.Name = "tpPrinterGbProps";
-            this.tpPrinterGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpPrinterGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpPrinterGbProps.TabIndex = 13;
             this.tpPrinterGbProps.TabStop = false;
             this.tpPrinterGbProps.Text = "参数";
@@ -1360,7 +1363,7 @@
             this.tpPrinterPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpPrinterPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpPrinterPanelProps.Name = "tpPrinterPanelProps";
-            this.tpPrinterPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpPrinterPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpPrinterPanelProps.TabIndex = 1;
             // 
             // panel4
@@ -1449,7 +1452,7 @@
             this.tpQrScanner.Location = new System.Drawing.Point(4, 44);
             this.tpQrScanner.Name = "tpQrScanner";
             this.tpQrScanner.Padding = new System.Windows.Forms.Padding(3);
-            this.tpQrScanner.Size = new System.Drawing.Size(1042, 447);
+            this.tpQrScanner.Size = new System.Drawing.Size(981, 450);
             this.tpQrScanner.TabIndex = 4;
             this.tpQrScanner.Text = "二维码扫描器";
             this.tpQrScanner.UseVisualStyleBackColor = true;
@@ -1462,7 +1465,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(339, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(700, 372);
+            this.groupBox3.Size = new System.Drawing.Size(639, 375);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "功能测试";
@@ -1552,7 +1555,7 @@
             this.groupBox16.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox16.Location = new System.Drawing.Point(3, 72);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(336, 372);
+            this.groupBox16.Size = new System.Drawing.Size(336, 375);
             this.groupBox16.TabIndex = 16;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "参数";
@@ -1563,7 +1566,7 @@
             this.tpQRScannerPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpQRScannerPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpQRScannerPanelProps.Name = "tpQRScannerPanelProps";
-            this.tpQRScannerPanelProps.Size = new System.Drawing.Size(330, 351);
+            this.tpQRScannerPanelProps.Size = new System.Drawing.Size(330, 354);
             this.tpQRScannerPanelProps.TabIndex = 1;
             // 
             // panel7
@@ -1577,7 +1580,7 @@
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(3, 3);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1036, 69);
+            this.panel7.Size = new System.Drawing.Size(975, 69);
             this.panel7.TabIndex = 15;
             // 
             // tpQRScannerBtnSaveConfig
@@ -1606,7 +1609,7 @@
             this.tpQRScannerCbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tpQRScannerCbBrand.FormattingEnabled = true;
             this.tpQRScannerCbBrand.ItemHeight = 13;
-            this.tpQRScannerCbBrand.Location = new System.Drawing.Point(139, 23);
+            this.tpQRScannerCbBrand.Location = new System.Drawing.Point(108, 23);
             this.tpQRScannerCbBrand.Name = "tpQRScannerCbBrand";
             this.tpQRScannerCbBrand.Size = new System.Drawing.Size(252, 21);
             this.tpQRScannerCbBrand.TabIndex = 2;
@@ -1616,7 +1619,7 @@
             // 
             this.label26.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(92, 27);
+            this.label26.Location = new System.Drawing.Point(61, 27);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(42, 14);
             this.label26.TabIndex = 1;
@@ -1628,7 +1631,7 @@
             this.tpQRScannerCbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tpQRScannerCbModel.FormattingEnabled = true;
             this.tpQRScannerCbModel.ItemHeight = 13;
-            this.tpQRScannerCbModel.Location = new System.Drawing.Point(456, 23);
+            this.tpQRScannerCbModel.Location = new System.Drawing.Point(425, 23);
             this.tpQRScannerCbModel.Name = "tpQRScannerCbModel";
             this.tpQRScannerCbModel.Size = new System.Drawing.Size(252, 21);
             this.tpQRScannerCbModel.TabIndex = 4;
@@ -1638,7 +1641,7 @@
             // 
             this.label30.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(409, 27);
+            this.label30.Location = new System.Drawing.Point(378, 27);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(42, 14);
             this.label30.TabIndex = 3;
@@ -1673,6 +1676,7 @@
             // 
             // groupBox20
             // 
+            this.groupBox20.Controls.Add(this.tpRoomBtnCancelBackAndRead);
             this.groupBox20.Controls.Add(this.label38);
             this.groupBox20.Controls.Add(this.tpRoomCardTimeout);
             this.groupBox20.Controls.Add(this.tpRoomBtnClearCard);
@@ -1710,7 +1714,7 @@
             // 
             // tpRoomBtnClearCard
             // 
-            this.tpRoomBtnClearCard.Location = new System.Drawing.Point(261, 108);
+            this.tpRoomBtnClearCard.Location = new System.Drawing.Point(397, 107);
             this.tpRoomBtnClearCard.Name = "tpRoomBtnClearCard";
             this.tpRoomBtnClearCard.Size = new System.Drawing.Size(130, 34);
             this.tpRoomBtnClearCard.TabIndex = 33;
@@ -2026,7 +2030,7 @@
             this.tpPSB.Location = new System.Drawing.Point(4, 44);
             this.tpPSB.Name = "tpPSB";
             this.tpPSB.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPSB.Size = new System.Drawing.Size(981, 450);
+            this.tpPSB.Size = new System.Drawing.Size(981, 447);
             this.tpPSB.TabIndex = 6;
             this.tpPSB.Text = "PSB";
             this.tpPSB.UseVisualStyleBackColor = true;
@@ -2042,10 +2046,86 @@
             this.groupBox17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox17.Location = new System.Drawing.Point(339, 72);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(639, 375);
+            this.groupBox17.Size = new System.Drawing.Size(639, 372);
             this.groupBox17.TabIndex = 17;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "功能测试";
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.tpPSBTimeStayOut);
+            this.groupBox23.Controls.Add(this.label58);
+            this.groupBox23.Controls.Add(this.tpPSBTxStayIDNo);
+            this.groupBox23.Controls.Add(this.label59);
+            this.groupBox23.Controls.Add(this.tpPSBTxStayRoom);
+            this.groupBox23.Controls.Add(this.label60);
+            this.groupBox23.Controls.Add(this.tpPSBBtnStay);
+            this.groupBox23.Location = new System.Drawing.Point(10, 321);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(614, 50);
+            this.groupBox23.TabIndex = 34;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "续住上传";
+            // 
+            // tpPSBTimeStayOut
+            // 
+            this.tpPSBTimeStayOut.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            this.tpPSBTimeStayOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.tpPSBTimeStayOut.Location = new System.Drawing.Point(372, 18);
+            this.tpPSBTimeStayOut.Name = "tpPSBTimeStayOut";
+            this.tpPSBTimeStayOut.Size = new System.Drawing.Size(140, 22);
+            this.tpPSBTimeStayOut.TabIndex = 49;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(305, 23);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(63, 14);
+            this.label58.TabIndex = 48;
+            this.label58.Text = "离店时间";
+            // 
+            // tpPSBTxStayIDNo
+            // 
+            this.tpPSBTxStayIDNo.Location = new System.Drawing.Point(167, 18);
+            this.tpPSBTxStayIDNo.Name = "tpPSBTxStayIDNo";
+            this.tpPSBTxStayIDNo.Size = new System.Drawing.Size(135, 22);
+            this.tpPSBTxStayIDNo.TabIndex = 31;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(102, 22);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(63, 14);
+            this.label59.TabIndex = 30;
+            this.label59.Text = "身份证号";
+            // 
+            // tpPSBTxStayRoom
+            // 
+            this.tpPSBTxStayRoom.Location = new System.Drawing.Point(59, 18);
+            this.tpPSBTxStayRoom.Name = "tpPSBTxStayRoom";
+            this.tpPSBTxStayRoom.Size = new System.Drawing.Size(40, 22);
+            this.tpPSBTxStayRoom.TabIndex = 29;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(6, 21);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(49, 14);
+            this.label60.TabIndex = 28;
+            this.label60.Text = "房间号";
+            // 
+            // tpPSBBtnStay
+            // 
+            this.tpPSBBtnStay.Location = new System.Drawing.Point(516, 10);
+            this.tpPSBBtnStay.Name = "tpPSBBtnStay";
+            this.tpPSBBtnStay.Size = new System.Drawing.Size(86, 34);
+            this.tpPSBBtnStay.TabIndex = 24;
+            this.tpPSBBtnStay.Text = "续住";
+            this.tpPSBBtnStay.UseVisualStyleBackColor = true;
+            this.tpPSBBtnStay.Click += new System.EventHandler(this.tpPSBBtnStay_Click);
             // 
             // groupBox22
             // 
@@ -2489,7 +2569,7 @@
             this.groupBox19.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox19.Location = new System.Drawing.Point(3, 72);
             this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(336, 375);
+            this.groupBox19.Size = new System.Drawing.Size(336, 372);
             this.groupBox19.TabIndex = 16;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "参数";
@@ -2500,7 +2580,7 @@
             this.tpPSBPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpPSBPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpPSBPanelProps.Name = "tpPSBPanelProps";
-            this.tpPSBPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpPSBPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpPSBPanelProps.TabIndex = 1;
             // 
             // panel9
@@ -2602,81 +2682,25 @@
             this.rtbInfoOut.TabIndex = 0;
             this.rtbInfoOut.Text = "";
             // 
-            // groupBox23
+            // tpCardBoxBtnCancelBack
             // 
-            this.groupBox23.Controls.Add(this.tpPSBTimeStayOut);
-            this.groupBox23.Controls.Add(this.label58);
-            this.groupBox23.Controls.Add(this.tpPSBTxStayIDNo);
-            this.groupBox23.Controls.Add(this.label59);
-            this.groupBox23.Controls.Add(this.tpPSBTxStayRoom);
-            this.groupBox23.Controls.Add(this.label60);
-            this.groupBox23.Controls.Add(this.tpPSBBtnStay);
-            this.groupBox23.Location = new System.Drawing.Point(10, 321);
-            this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Size = new System.Drawing.Size(614, 50);
-            this.groupBox23.TabIndex = 34;
-            this.groupBox23.TabStop = false;
-            this.groupBox23.Text = "续住上传";
+            this.tpCardBoxBtnCancelBack.Location = new System.Drawing.Point(383, 126);
+            this.tpCardBoxBtnCancelBack.Name = "tpCardBoxBtnCancelBack";
+            this.tpCardBoxBtnCancelBack.Size = new System.Drawing.Size(129, 36);
+            this.tpCardBoxBtnCancelBack.TabIndex = 26;
+            this.tpCardBoxBtnCancelBack.Text = "取消收卡";
+            this.tpCardBoxBtnCancelBack.UseVisualStyleBackColor = true;
+            this.tpCardBoxBtnCancelBack.Click += new System.EventHandler(this.tpCardBoxBtnCancelBack_Click);
             // 
-            // tpPSBTxStayIDNo
+            // tpRoomBtnCancelBackAndRead
             // 
-            this.tpPSBTxStayIDNo.Location = new System.Drawing.Point(167, 18);
-            this.tpPSBTxStayIDNo.Name = "tpPSBTxStayIDNo";
-            this.tpPSBTxStayIDNo.Size = new System.Drawing.Size(135, 22);
-            this.tpPSBTxStayIDNo.TabIndex = 31;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(102, 22);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(63, 14);
-            this.label59.TabIndex = 30;
-            this.label59.Text = "身份证号";
-            // 
-            // tpPSBTxStayRoom
-            // 
-            this.tpPSBTxStayRoom.Location = new System.Drawing.Point(59, 18);
-            this.tpPSBTxStayRoom.Name = "tpPSBTxStayRoom";
-            this.tpPSBTxStayRoom.Size = new System.Drawing.Size(40, 22);
-            this.tpPSBTxStayRoom.TabIndex = 29;
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(6, 21);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(49, 14);
-            this.label60.TabIndex = 28;
-            this.label60.Text = "房间号";
-            // 
-            // tpPSBBtnStay
-            // 
-            this.tpPSBBtnStay.Location = new System.Drawing.Point(516, 10);
-            this.tpPSBBtnStay.Name = "tpPSBBtnStay";
-            this.tpPSBBtnStay.Size = new System.Drawing.Size(86, 34);
-            this.tpPSBBtnStay.TabIndex = 24;
-            this.tpPSBBtnStay.Text = "续住";
-            this.tpPSBBtnStay.UseVisualStyleBackColor = true;
-            this.tpPSBBtnStay.Click += new System.EventHandler(this.tpPSBBtnStay_Click);
-            // 
-            // tpPSBTimeStayOut
-            // 
-            this.tpPSBTimeStayOut.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            this.tpPSBTimeStayOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.tpPSBTimeStayOut.Location = new System.Drawing.Point(372, 18);
-            this.tpPSBTimeStayOut.Name = "tpPSBTimeStayOut";
-            this.tpPSBTimeStayOut.Size = new System.Drawing.Size(140, 22);
-            this.tpPSBTimeStayOut.TabIndex = 49;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(305, 23);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(63, 14);
-            this.label58.TabIndex = 48;
-            this.label58.Text = "离店时间";
+            this.tpRoomBtnCancelBackAndRead.Location = new System.Drawing.Point(261, 105);
+            this.tpRoomBtnCancelBackAndRead.Name = "tpRoomBtnCancelBackAndRead";
+            this.tpRoomBtnCancelBackAndRead.Size = new System.Drawing.Size(129, 36);
+            this.tpRoomBtnCancelBackAndRead.TabIndex = 36;
+            this.tpRoomBtnCancelBackAndRead.Text = "取消收卡及读卡";
+            this.tpRoomBtnCancelBackAndRead.UseVisualStyleBackColor = true;
+            this.tpRoomBtnCancelBackAndRead.Click += new System.EventHandler(this.tpRoomBtnCancelBackAndRead_Click);
             // 
             // MainForm
             // 
@@ -2750,6 +2774,8 @@
             this.tpPSB.ResumeLayout(false);
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
             this.groupBox22.ResumeLayout(false);
             this.groupBox22.PerformLayout();
             this.groupBox21.ResumeLayout(false);
@@ -2760,8 +2786,6 @@
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
             this.groupBox4.ResumeLayout(false);
-            this.groupBox23.ResumeLayout(false);
-            this.groupBox23.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2997,5 +3021,7 @@
         private System.Windows.Forms.Button tpPSBBtnStay;
         private System.Windows.Forms.DateTimePicker tpPSBTimeStayOut;
         private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Button tpCardBoxBtnCancelBack;
+        private System.Windows.Forms.Button tpRoomBtnCancelBackAndRead;
     }
 }

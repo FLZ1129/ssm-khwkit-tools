@@ -854,6 +854,18 @@ namespace khwkit_tools
             //pb.Done();
             OutRespLog("【收卡到卡箱】", resp);
         }
+        private async void tpCardBoxBtnCancelBack_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseurl))
+            {
+                return;
+            }
+            formLogger.Info("【取消收卡】...");
+            //var pb = this.ShowProgress("取消收卡......");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/cancel_back");
+            //pb.Done();
+            OutRespLog("【取消收卡】", resp);
+        }
 
         private async void tpCardBoxBtnCheckCardAtTake_Click(object sender, EventArgs e)
         {
@@ -1199,6 +1211,18 @@ namespace khwkit_tools
             {
                 tpRoomCardTimeEnd.Text = resp?.Data?.End.ToDateTime().ToString("yyyy-MM-dd HH:mm:ss");
             }
+        }
+        private  async void tpRoomBtnCancelBackAndRead_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseurl))
+            {
+                return;
+            }
+            formLogger.Info("【取消收卡及读卡】...");
+            //var pb = this.ShowProgress("取消收卡及读卡......");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/cancel_back_and_read");
+            //pb.Done();
+            OutRespLog("【取消收卡及读卡】", resp);
         }
 
         private async void tpRoomBtnClearCard_Click(object sender, EventArgs e)
