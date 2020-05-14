@@ -532,17 +532,17 @@ namespace khwkit_tools
 
         private void tpSystemCbBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CbBrand_SelectedIndexChanged(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemGbProps);
+            CbBrand_SelectedIndexChanged(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemPanelProps);
         }
 
         private void tpSystemCbModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CbModel_SelectedIndexChanged(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemGbProps);
+            CbModel_SelectedIndexChanged(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemPanelProps);
         }
 
         private void tpSystemGetConfig_Click(object sender, EventArgs e)
         {
-            FetchServiceConfig(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemGbProps);
+            FetchServiceConfig(KitServices.System, tpSystemCbBrand, tpSystemCbModel, tpSystemPanelProps);
 
         }
 
@@ -620,7 +620,7 @@ namespace khwkit_tools
             }
             formLogger.Info($"【关闭LED】LED :{ledNo}  ......");
             //var pb = this.ShowProgress("正在发送控制命令......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/led/blink",
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/led/off",
                 new JsonObject()
                 {
                     { "ledNo",ledNo},
