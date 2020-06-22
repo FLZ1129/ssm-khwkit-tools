@@ -227,7 +227,7 @@ namespace khwkit_tools
             }
             txSN.Text = resp.Data.SN;
             txSoftVersion.Text = resp.Data.SwVersion;
-            txHwVersion.Text = resp.Data.HwVersion;
+            txHwVersion.Text = $"{resp.Data.HwVersion}({resp.Data.HwVersionDesc})";
         }
         public class ItemEx
         {
@@ -628,6 +628,19 @@ namespace khwkit_tools
             //pb.Done();
             OutRespLog($"【关闭LED】LED :{ledNo}", resp);
         }
+        private bool TryParseHexToInt(string hex,out int v)
+        {
+            v = -1;
+            try
+            {
+                v = Convert.ToInt32(hex, 16);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         private async void SystemDevPowerCtl(int action)
         {
             if (!TryGetHwKitBaseUrl(out string baseurl))
@@ -641,22 +654,23 @@ namespace khwkit_tools
                 tpSystemTxDevToPowerCtl.Focus();
                 return;
             }
-            if (!int.TryParse(devToCtlStr, out int devToCtl) || devToCtl < 0 || devToCtl > 0x7f)
+           
+            if (!TryParseHexToInt(devToCtlStr, out int devToCtl) || devToCtl < 0 || devToCtl > 0x7f)
             {
                 Utils.Error("请正确填写要控制的设备");
                 tpSystemTxDevToPowerCtl.Focus();
                 return;
             }
-            formLogger.Info($"【电源控制】action : {action} , devices : {devToCtl}  ......");
+            formLogger.Info($"【电源控制】action : {action} , devices : 0x{devToCtl:X2}  ......");
             //var pb = this.ShowProgress("正在发送控制命令......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/led/blink",
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/power",
                 new JsonObject()
                 {
-                    { "action ",action },
-                    { "devices ",devToCtl},
+                    { "action",action },
+                    { "devices",devToCtl},
                 });
             //pb.Done();
-            OutRespLog("【电源控制】action : {action} , devices : {devToCtl}", resp);
+            OutRespLog($"【电源控制】action : {action} , devices : 0x{devToCtl:X2}", resp);
         }
         private void tpSystelBtnPowerOff_Click(object sender, EventArgs e)
         {
@@ -676,22 +690,22 @@ namespace khwkit_tools
         #region 身份证采集
         private void tpIDReaderCbBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CbBrand_SelectedIndexChanged(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpRoomCardPanelProps);
+            CbBrand_SelectedIndexChanged(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpIDReaderPanelProps);
         }
 
         private void tpIDReaderCbModel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CbModel_SelectedIndexChanged(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpRoomCardPanelProps);
+            CbModel_SelectedIndexChanged(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpIDReaderPanelProps);
         }
 
         private void tpIDReaderBtnGetConfig_Click(object sender, EventArgs e)
         {
-            FetchServiceConfig(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpRoomCardPanelProps);
+            FetchServiceConfig(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpIDReaderPanelProps);
         }
 
         private void tpIDReaderSaveConfig_Click(object sender, EventArgs e)
         {
-            SaveServiceConfig(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpRoomCardPanelProps);
+            SaveServiceConfig(KitServices.IDReader, tpIDReaderCbBrand, tpIDReaderCbModel, tpIDReaderPanelProps);
         }
         private void tpIDReaderCheckState_Click(object sender, EventArgs e)
         {
