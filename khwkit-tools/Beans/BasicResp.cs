@@ -6,7 +6,7 @@ namespace khwkit_tools.Beans
     public class BasicResp<T>: BaseHttpResponse
     {
         [JsonProperty("code")]
-        public int Code { get; set; }
+        public int Code { get; set; } = -1;
         [JsonProperty("message")]
         public string Message { get; set; }
         public T Data { get; set; }
