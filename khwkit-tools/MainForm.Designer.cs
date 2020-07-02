@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbSummary = new System.Windows.Forms.GroupBox();
+            this.txHwkitPort = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
             this.btnFetchSummary = new System.Windows.Forms.Button();
             this.txHwkitIp = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -288,8 +290,6 @@
             this.label62 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rtbInfoOut = new System.Windows.Forms.RichTextBox();
-            this.txHwkitPort = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
             this.gbSummary.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabCtl.SuspendLayout();
@@ -367,6 +367,25 @@
             this.gbSummary.TabIndex = 0;
             this.gbSummary.TabStop = false;
             this.gbSummary.Text = "基本信息";
+            // 
+            // txHwkitPort
+            // 
+            this.txHwkitPort.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txHwkitPort.Location = new System.Drawing.Point(520, 36);
+            this.txHwkitPort.Name = "txHwkitPort";
+            this.txHwkitPort.Size = new System.Drawing.Size(88, 22);
+            this.txHwkitPort.TabIndex = 16;
+            this.txHwkitPort.Text = "5000";
+            // 
+            // label66
+            // 
+            this.label66.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(466, 40);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(42, 14);
+            this.label66.TabIndex = 15;
+            this.label66.Text = "端口:";
             // 
             // btnFetchSummary
             // 
@@ -2810,6 +2829,7 @@
             // 
             this.tpPayPiRtxtLog.Location = new System.Drawing.Point(24, 197);
             this.tpPayPiRtxtLog.Name = "tpPayPiRtxtLog";
+            this.tpPayPiRtxtLog.ReadOnly = true;
             this.tpPayPiRtxtLog.Size = new System.Drawing.Size(506, 94);
             this.tpPayPiRtxtLog.TabIndex = 12;
             this.tpPayPiRtxtLog.Text = "";
@@ -3043,25 +3063,6 @@
             this.rtbInfoOut.Size = new System.Drawing.Size(989, 125);
             this.rtbInfoOut.TabIndex = 0;
             this.rtbInfoOut.Text = "";
-            // 
-            // txHwkitPort
-            // 
-            this.txHwkitPort.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.txHwkitPort.Location = new System.Drawing.Point(520, 36);
-            this.txHwkitPort.Name = "txHwkitPort";
-            this.txHwkitPort.Size = new System.Drawing.Size(88, 22);
-            this.txHwkitPort.TabIndex = 16;
-            this.txHwkitPort.Text = "5000";
-            // 
-            // label66
-            // 
-            this.label66.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(466, 40);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(42, 14);
-            this.label66.TabIndex = 15;
-            this.label66.Text = "端口:";
             // 
             // MainForm
             // 

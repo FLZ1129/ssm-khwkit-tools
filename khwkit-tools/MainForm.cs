@@ -1738,6 +1738,7 @@ namespace khwkit_tools
                     tpPayPiRtxtLog.Clear();
                 }
                 tpPayPiRtxtLog.AppendText($"\n{msg}");
+                tpPayPiRtxtLog.ScrollToCaret();
             });
         }
 
