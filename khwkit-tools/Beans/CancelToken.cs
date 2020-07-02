@@ -7,6 +7,11 @@ namespace khwkit.Beans
     {
         private long flag = 1;
 
+        public void Reset()
+        {
+            Interlocked.Exchange(ref flag, 1);
+        }
+
         public void Cancel()
         {
             Interlocked.Exchange(ref flag, 0);

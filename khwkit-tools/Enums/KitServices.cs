@@ -12,6 +12,7 @@ namespace khwkit.Enums
         Printer,
         QRScanner,
         System,
+        PayPi,
     }
 
     public static class KitServicesExtension
@@ -27,6 +28,7 @@ namespace khwkit.Enums
                 case KitServices.Printer: return "printer";
                 case KitServices.QRScanner: return "qr_scanner";
                 case KitServices.System: return "system";
+                case KitServices.PayPi: return "pay_pi";
             }
             return "";
         }
@@ -41,6 +43,7 @@ namespace khwkit.Enums
                 case KitServices.Printer: return "小票打印服务";
                 case KitServices.QRScanner: return "二维码扫描服务";
                 case KitServices.System: return "系统服务";
+                case KitServices.PayPi: return "刷卡支付服务";
             }
             return "";
         }

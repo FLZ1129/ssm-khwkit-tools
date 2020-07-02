@@ -252,21 +252,44 @@
             this.tpPSBPanelProps = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.tpPSBBtnSaveConfig = new System.Windows.Forms.Button();
-            this.tpPSBBtnGeConfig = new System.Windows.Forms.Button();
+            this.tpPSBBtnGetConfig = new System.Windows.Forms.Button();
             this.tpPSBCbBrand = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
             this.tpPSBCbModel = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
+            this.tpPayPi = new System.Windows.Forms.TabPage();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.tpPayPiBtnSwallowCard = new System.Windows.Forms.Button();
+            this.tpPayPiBtnEjectCard = new System.Windows.Forms.Button();
+            this.tpPayPiEnterCardTimeout = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.tpPayPiRtxtLog = new System.Windows.Forms.RichTextBox();
+            this.tpPayPiBtnTradeTrans = new System.Windows.Forms.Button();
+            this.tpPayPiBtnStartPin = new System.Windows.Forms.Button();
+            this.tpPayPiBtnEnterAndReadCard = new System.Windows.Forms.Button();
+            this.tpPayPiBtnReadCard = new System.Windows.Forms.Button();
+            this.tpPayPiBtnEnterCard = new System.Windows.Forms.Button();
+            this.tpPayPiBtnInit = new System.Windows.Forms.Button();
+            this.tpPayPiTxtTradeNo = new System.Windows.Forms.TextBox();
+            this.tpPayPiTxtHotelId = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.tpPayPiLbState = new System.Windows.Forms.Label();
+            this.tpPayPiBtnCheck = new System.Windows.Forms.Button();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.tpPayPiPanelProps = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.tpPayPiBtnSaveConfig = new System.Windows.Forms.Button();
+            this.tpPayPiBtnGetConfig = new System.Windows.Forms.Button();
+            this.tpPayPiCbBrand = new System.Windows.Forms.ComboBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.tpPayPiCbModel = new System.Windows.Forms.ComboBox();
+            this.label62 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rtbInfoOut = new System.Windows.Forms.RichTextBox();
-            this.tpPayPi = new System.Windows.Forms.TabPage();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label61 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label62 = new System.Windows.Forms.Label();
+            this.txHwkitPort = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
             this.gbSummary.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabCtl.SuspendLayout();
@@ -310,13 +333,18 @@
             this.groupBox18.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.tpPayPi.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox26.SuspendLayout();
+            this.groupBox24.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbSummary
             // 
+            this.gbSummary.Controls.Add(this.txHwkitPort);
+            this.gbSummary.Controls.Add(this.label66);
             this.gbSummary.Controls.Add(this.btnFetchSummary);
             this.gbSummary.Controls.Add(this.txHwkitIp);
             this.gbSummary.Controls.Add(this.label8);
@@ -356,7 +384,7 @@
             this.txHwkitIp.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txHwkitIp.Location = new System.Drawing.Point(307, 36);
             this.txHwkitIp.Name = "txHwkitIp";
-            this.txHwkitIp.Size = new System.Drawing.Size(302, 22);
+            this.txHwkitIp.Size = new System.Drawing.Size(155, 22);
             this.txHwkitIp.TabIndex = 13;
             // 
             // label8
@@ -778,7 +806,7 @@
             // 
             // tpSystemSaveConfig
             // 
-            this.tpSystemSaveConfig.Location = new System.Drawing.Point(786, 21);
+            this.tpSystemSaveConfig.Location = new System.Drawing.Point(796, 21);
             this.tpSystemSaveConfig.Name = "tpSystemSaveConfig";
             this.tpSystemSaveConfig.Size = new System.Drawing.Size(108, 25);
             this.tpSystemSaveConfig.TabIndex = 6;
@@ -788,7 +816,7 @@
             // 
             // tpSystemGetConfig
             // 
-            this.tpSystemGetConfig.Location = new System.Drawing.Point(672, 21);
+            this.tpSystemGetConfig.Location = new System.Drawing.Point(682, 21);
             this.tpSystemGetConfig.Name = "tpSystemGetConfig";
             this.tpSystemGetConfig.Size = new System.Drawing.Size(108, 25);
             this.tpSystemGetConfig.TabIndex = 5;
@@ -848,7 +876,7 @@
             this.tpIDReader.Location = new System.Drawing.Point(4, 44);
             this.tpIDReader.Name = "tpIDReader";
             this.tpIDReader.Padding = new System.Windows.Forms.Padding(3);
-            this.tpIDReader.Size = new System.Drawing.Size(981, 450);
+            this.tpIDReader.Size = new System.Drawing.Size(981, 447);
             this.tpIDReader.TabIndex = 1;
             this.tpIDReader.Text = "身份证阅读器";
             this.tpIDReader.UseVisualStyleBackColor = true;
@@ -861,7 +889,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(339, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(639, 375);
+            this.groupBox1.Size = new System.Drawing.Size(639, 372);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "功能测试";
@@ -941,7 +969,7 @@
             this.tpIDReaderGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpIDReaderGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpIDReaderGbProps.Name = "tpIDReaderGbProps";
-            this.tpIDReaderGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpIDReaderGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpIDReaderGbProps.TabIndex = 9;
             this.tpIDReaderGbProps.TabStop = false;
             this.tpIDReaderGbProps.Text = "参数";
@@ -952,7 +980,7 @@
             this.tpIDReaderPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpIDReaderPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpIDReaderPanelProps.Name = "tpIDReaderPanelProps";
-            this.tpIDReaderPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpIDReaderPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpIDReaderPanelProps.TabIndex = 1;
             // 
             // panel1
@@ -971,7 +999,7 @@
             // 
             // tpIDReaderSaveConfig
             // 
-            this.tpIDReaderSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpIDReaderSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpIDReaderSaveConfig.Name = "tpIDReaderSaveConfig";
             this.tpIDReaderSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpIDReaderSaveConfig.TabIndex = 6;
@@ -981,7 +1009,7 @@
             // 
             // tpIDReaderBtnGetConfig
             // 
-            this.tpIDReaderBtnGetConfig.Location = new System.Drawing.Point(672, 22);
+            this.tpIDReaderBtnGetConfig.Location = new System.Drawing.Point(682, 22);
             this.tpIDReaderBtnGetConfig.Name = "tpIDReaderBtnGetConfig";
             this.tpIDReaderBtnGetConfig.Size = new System.Drawing.Size(108, 23);
             this.tpIDReaderBtnGetConfig.TabIndex = 5;
@@ -1041,7 +1069,7 @@
             this.tpCardBox.Location = new System.Drawing.Point(4, 44);
             this.tpCardBox.Name = "tpCardBox";
             this.tpCardBox.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCardBox.Size = new System.Drawing.Size(981, 450);
+            this.tpCardBox.Size = new System.Drawing.Size(981, 447);
             this.tpCardBox.TabIndex = 2;
             this.tpCardBox.Text = "收发卡机";
             this.tpCardBox.UseVisualStyleBackColor = true;
@@ -1054,7 +1082,7 @@
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox9.Location = new System.Drawing.Point(339, 72);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(639, 375);
+            this.groupBox9.Size = new System.Drawing.Size(639, 372);
             this.groupBox9.TabIndex = 13;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "功能测试";
@@ -1200,7 +1228,7 @@
             this.tpCardBoxGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpCardBoxGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpCardBoxGbProps.Name = "tpCardBoxGbProps";
-            this.tpCardBoxGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpCardBoxGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpCardBoxGbProps.TabIndex = 12;
             this.tpCardBoxGbProps.TabStop = false;
             this.tpCardBoxGbProps.Text = "参数";
@@ -1211,7 +1239,7 @@
             this.tpCardBoxPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpCardBoxPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpCardBoxPanelProps.Name = "tpCardBoxPanelProps";
-            this.tpCardBoxPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpCardBoxPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpCardBoxPanelProps.TabIndex = 1;
             // 
             // panel3
@@ -1230,7 +1258,7 @@
             // 
             // tpCardBoxBtnSaveConfig
             // 
-            this.tpCardBoxBtnSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpCardBoxBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpCardBoxBtnSaveConfig.Name = "tpCardBoxBtnSaveConfig";
             this.tpCardBoxBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpCardBoxBtnSaveConfig.TabIndex = 6;
@@ -1240,7 +1268,7 @@
             // 
             // tpCardBoxBtnGetConfig
             // 
-            this.tpCardBoxBtnGetConfig.Location = new System.Drawing.Point(672, 22);
+            this.tpCardBoxBtnGetConfig.Location = new System.Drawing.Point(682, 22);
             this.tpCardBoxBtnGetConfig.Name = "tpCardBoxBtnGetConfig";
             this.tpCardBoxBtnGetConfig.Size = new System.Drawing.Size(108, 23);
             this.tpCardBoxBtnGetConfig.TabIndex = 5;
@@ -1300,7 +1328,7 @@
             this.tpPrinter.Location = new System.Drawing.Point(4, 44);
             this.tpPrinter.Name = "tpPrinter";
             this.tpPrinter.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPrinter.Size = new System.Drawing.Size(981, 450);
+            this.tpPrinter.Size = new System.Drawing.Size(981, 447);
             this.tpPrinter.TabIndex = 3;
             this.tpPrinter.Text = "小票打印机";
             this.tpPrinter.UseVisualStyleBackColor = true;
@@ -1313,7 +1341,7 @@
             this.groupBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox11.Location = new System.Drawing.Point(339, 72);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(639, 375);
+            this.groupBox11.Size = new System.Drawing.Size(639, 372);
             this.groupBox11.TabIndex = 14;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "功能测试";
@@ -1372,7 +1400,7 @@
             this.tpPrinterGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpPrinterGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpPrinterGbProps.Name = "tpPrinterGbProps";
-            this.tpPrinterGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpPrinterGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpPrinterGbProps.TabIndex = 13;
             this.tpPrinterGbProps.TabStop = false;
             this.tpPrinterGbProps.Text = "参数";
@@ -1383,7 +1411,7 @@
             this.tpPrinterPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpPrinterPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpPrinterPanelProps.Name = "tpPrinterPanelProps";
-            this.tpPrinterPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpPrinterPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpPrinterPanelProps.TabIndex = 1;
             // 
             // panel4
@@ -1402,7 +1430,7 @@
             // 
             // tpPrinterBtnSaveConfig
             // 
-            this.tpPrinterBtnSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpPrinterBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpPrinterBtnSaveConfig.Name = "tpPrinterBtnSaveConfig";
             this.tpPrinterBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpPrinterBtnSaveConfig.TabIndex = 6;
@@ -1412,7 +1440,7 @@
             // 
             // tpPrinterBtnGetConfig
             // 
-            this.tpPrinterBtnGetConfig.Location = new System.Drawing.Point(672, 22);
+            this.tpPrinterBtnGetConfig.Location = new System.Drawing.Point(682, 22);
             this.tpPrinterBtnGetConfig.Name = "tpPrinterBtnGetConfig";
             this.tpPrinterBtnGetConfig.Size = new System.Drawing.Size(108, 23);
             this.tpPrinterBtnGetConfig.TabIndex = 5;
@@ -1472,7 +1500,7 @@
             this.tpQrScanner.Location = new System.Drawing.Point(4, 44);
             this.tpQrScanner.Name = "tpQrScanner";
             this.tpQrScanner.Padding = new System.Windows.Forms.Padding(3);
-            this.tpQrScanner.Size = new System.Drawing.Size(981, 450);
+            this.tpQrScanner.Size = new System.Drawing.Size(981, 447);
             this.tpQrScanner.TabIndex = 4;
             this.tpQrScanner.Text = "二维码扫描器";
             this.tpQrScanner.UseVisualStyleBackColor = true;
@@ -1485,7 +1513,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(339, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(639, 375);
+            this.groupBox3.Size = new System.Drawing.Size(639, 372);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "功能测试";
@@ -1575,7 +1603,7 @@
             this.groupBox16.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox16.Location = new System.Drawing.Point(3, 72);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(336, 375);
+            this.groupBox16.Size = new System.Drawing.Size(336, 372);
             this.groupBox16.TabIndex = 16;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "参数";
@@ -1586,7 +1614,7 @@
             this.tpQRScannerPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpQRScannerPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpQRScannerPanelProps.Name = "tpQRScannerPanelProps";
-            this.tpQRScannerPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpQRScannerPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpQRScannerPanelProps.TabIndex = 1;
             // 
             // panel7
@@ -1605,7 +1633,7 @@
             // 
             // tpQRScannerBtnSaveConfig
             // 
-            this.tpQRScannerBtnSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpQRScannerBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpQRScannerBtnSaveConfig.Name = "tpQRScannerBtnSaveConfig";
             this.tpQRScannerBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpQRScannerBtnSaveConfig.TabIndex = 6;
@@ -1615,7 +1643,7 @@
             // 
             // tpQRScannerBtnGetConfig
             // 
-            this.tpQRScannerBtnGetConfig.Location = new System.Drawing.Point(672, 22);
+            this.tpQRScannerBtnGetConfig.Location = new System.Drawing.Point(682, 22);
             this.tpQRScannerBtnGetConfig.Name = "tpQRScannerBtnGetConfig";
             this.tpQRScannerBtnGetConfig.Size = new System.Drawing.Size(108, 23);
             this.tpQRScannerBtnGetConfig.TabIndex = 5;
@@ -1675,7 +1703,7 @@
             this.tpRoomCard.Location = new System.Drawing.Point(4, 44);
             this.tpRoomCard.Name = "tpRoomCard";
             this.tpRoomCard.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRoomCard.Size = new System.Drawing.Size(981, 450);
+            this.tpRoomCard.Size = new System.Drawing.Size(981, 447);
             this.tpRoomCard.TabIndex = 5;
             this.tpRoomCard.Text = "房卡读写卡器";
             this.tpRoomCard.UseVisualStyleBackColor = true;
@@ -1689,7 +1717,7 @@
             this.groupBox14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox14.Location = new System.Drawing.Point(339, 72);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(639, 375);
+            this.groupBox14.Size = new System.Drawing.Size(639, 372);
             this.groupBox14.TabIndex = 15;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "功能测试";
@@ -1960,7 +1988,7 @@
             this.tpRoomCardGbProps.Dock = System.Windows.Forms.DockStyle.Left;
             this.tpRoomCardGbProps.Location = new System.Drawing.Point(3, 72);
             this.tpRoomCardGbProps.Name = "tpRoomCardGbProps";
-            this.tpRoomCardGbProps.Size = new System.Drawing.Size(336, 375);
+            this.tpRoomCardGbProps.Size = new System.Drawing.Size(336, 372);
             this.tpRoomCardGbProps.TabIndex = 14;
             this.tpRoomCardGbProps.TabStop = false;
             this.tpRoomCardGbProps.Text = "参数";
@@ -1971,7 +1999,7 @@
             this.tpRoomCardPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpRoomCardPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpRoomCardPanelProps.Name = "tpRoomCardPanelProps";
-            this.tpRoomCardPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpRoomCardPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpRoomCardPanelProps.TabIndex = 1;
             // 
             // panel5
@@ -1990,7 +2018,7 @@
             // 
             // tpRoomCardBtnSaveConfig
             // 
-            this.tpRoomCardBtnSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpRoomCardBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpRoomCardBtnSaveConfig.Name = "tpRoomCardBtnSaveConfig";
             this.tpRoomCardBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpRoomCardBtnSaveConfig.TabIndex = 6;
@@ -2000,7 +2028,7 @@
             // 
             // tpRoomCardBtnGetConfig
             // 
-            this.tpRoomCardBtnGetConfig.Location = new System.Drawing.Point(672, 22);
+            this.tpRoomCardBtnGetConfig.Location = new System.Drawing.Point(682, 22);
             this.tpRoomCardBtnGetConfig.Name = "tpRoomCardBtnGetConfig";
             this.tpRoomCardBtnGetConfig.Size = new System.Drawing.Size(108, 23);
             this.tpRoomCardBtnGetConfig.TabIndex = 5;
@@ -2060,7 +2088,7 @@
             this.tpPSB.Location = new System.Drawing.Point(4, 44);
             this.tpPSB.Name = "tpPSB";
             this.tpPSB.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPSB.Size = new System.Drawing.Size(981, 450);
+            this.tpPSB.Size = new System.Drawing.Size(981, 447);
             this.tpPSB.TabIndex = 6;
             this.tpPSB.Text = "PSB";
             this.tpPSB.UseVisualStyleBackColor = true;
@@ -2076,7 +2104,7 @@
             this.groupBox17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox17.Location = new System.Drawing.Point(339, 72);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(639, 375);
+            this.groupBox17.Size = new System.Drawing.Size(639, 372);
             this.groupBox17.TabIndex = 17;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "功能测试";
@@ -2599,7 +2627,7 @@
             this.groupBox19.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox19.Location = new System.Drawing.Point(3, 72);
             this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Size = new System.Drawing.Size(336, 375);
+            this.groupBox19.Size = new System.Drawing.Size(336, 372);
             this.groupBox19.TabIndex = 16;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "参数";
@@ -2610,13 +2638,13 @@
             this.tpPSBPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tpPSBPanelProps.Location = new System.Drawing.Point(3, 18);
             this.tpPSBPanelProps.Name = "tpPSBPanelProps";
-            this.tpPSBPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpPSBPanelProps.Size = new System.Drawing.Size(330, 351);
             this.tpPSBPanelProps.TabIndex = 1;
             // 
             // panel9
             // 
             this.panel9.Controls.Add(this.tpPSBBtnSaveConfig);
-            this.panel9.Controls.Add(this.tpPSBBtnGeConfig);
+            this.panel9.Controls.Add(this.tpPSBBtnGetConfig);
             this.panel9.Controls.Add(this.tpPSBCbBrand);
             this.panel9.Controls.Add(this.label32);
             this.panel9.Controls.Add(this.tpPSBCbModel);
@@ -2629,7 +2657,7 @@
             // 
             // tpPSBBtnSaveConfig
             // 
-            this.tpPSBBtnSaveConfig.Location = new System.Drawing.Point(786, 22);
+            this.tpPSBBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
             this.tpPSBBtnSaveConfig.Name = "tpPSBBtnSaveConfig";
             this.tpPSBBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
             this.tpPSBBtnSaveConfig.TabIndex = 6;
@@ -2637,15 +2665,15 @@
             this.tpPSBBtnSaveConfig.UseVisualStyleBackColor = true;
             this.tpPSBBtnSaveConfig.Click += new System.EventHandler(this.tpPSBBtnSaveConfig_Click);
             // 
-            // tpPSBBtnGeConfig
+            // tpPSBBtnGetConfig
             // 
-            this.tpPSBBtnGeConfig.Location = new System.Drawing.Point(672, 22);
-            this.tpPSBBtnGeConfig.Name = "tpPSBBtnGeConfig";
-            this.tpPSBBtnGeConfig.Size = new System.Drawing.Size(108, 23);
-            this.tpPSBBtnGeConfig.TabIndex = 5;
-            this.tpPSBBtnGeConfig.Text = "获取配置";
-            this.tpPSBBtnGeConfig.UseVisualStyleBackColor = true;
-            this.tpPSBBtnGeConfig.Click += new System.EventHandler(this.tpPSBBtnGeConfig_Click);
+            this.tpPSBBtnGetConfig.Location = new System.Drawing.Point(682, 22);
+            this.tpPSBBtnGetConfig.Name = "tpPSBBtnGetConfig";
+            this.tpPSBBtnGetConfig.Size = new System.Drawing.Size(108, 23);
+            this.tpPSBBtnGetConfig.TabIndex = 5;
+            this.tpPSBBtnGetConfig.Text = "获取配置";
+            this.tpPSBBtnGetConfig.UseVisualStyleBackColor = true;
+            this.tpPSBBtnGetConfig.Click += new System.EventHandler(this.tpPSBBtnGeConfig_Click);
             // 
             // tpPSBCbBrand
             // 
@@ -2691,6 +2719,310 @@
             this.label33.TabIndex = 3;
             this.label33.Text = "型号:";
             // 
+            // tpPayPi
+            // 
+            this.tpPayPi.Controls.Add(this.groupBox25);
+            this.tpPayPi.Controls.Add(this.groupBox24);
+            this.tpPayPi.Controls.Add(this.panel6);
+            this.tpPayPi.Location = new System.Drawing.Point(4, 44);
+            this.tpPayPi.Name = "tpPayPi";
+            this.tpPayPi.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPayPi.Size = new System.Drawing.Size(981, 450);
+            this.tpPayPi.TabIndex = 7;
+            this.tpPayPi.Text = "刷卡支付";
+            this.tpPayPi.UseVisualStyleBackColor = true;
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.groupBox26);
+            this.groupBox25.Controls.Add(this.tpPayPiLbState);
+            this.groupBox25.Controls.Add(this.tpPayPiBtnCheck);
+            this.groupBox25.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox25.Location = new System.Drawing.Point(339, 72);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(639, 375);
+            this.groupBox25.TabIndex = 18;
+            this.groupBox25.TabStop = false;
+            this.groupBox25.Text = "功能测试";
+            // 
+            // groupBox26
+            // 
+            this.groupBox26.Controls.Add(this.tpPayPiBtnSwallowCard);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnEjectCard);
+            this.groupBox26.Controls.Add(this.tpPayPiEnterCardTimeout);
+            this.groupBox26.Controls.Add(this.label65);
+            this.groupBox26.Controls.Add(this.tpPayPiRtxtLog);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnTradeTrans);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnStartPin);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnEnterAndReadCard);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnReadCard);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnEnterCard);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnInit);
+            this.groupBox26.Controls.Add(this.tpPayPiTxtTradeNo);
+            this.groupBox26.Controls.Add(this.tpPayPiTxtHotelId);
+            this.groupBox26.Controls.Add(this.label64);
+            this.groupBox26.Controls.Add(this.label63);
+            this.groupBox26.Location = new System.Drawing.Point(21, 71);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Size = new System.Drawing.Size(553, 298);
+            this.groupBox26.TabIndex = 27;
+            this.groupBox26.TabStop = false;
+            this.groupBox26.Text = "刷卡支付";
+            // 
+            // tpPayPiBtnSwallowCard
+            // 
+            this.tpPayPiBtnSwallowCard.Location = new System.Drawing.Point(144, 163);
+            this.tpPayPiBtnSwallowCard.Name = "tpPayPiBtnSwallowCard";
+            this.tpPayPiBtnSwallowCard.Size = new System.Drawing.Size(112, 23);
+            this.tpPayPiBtnSwallowCard.TabIndex = 16;
+            this.tpPayPiBtnSwallowCard.Text = "吞卡";
+            this.tpPayPiBtnSwallowCard.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnSwallowCard.Click += new System.EventHandler(this.tpPayPiBtnSwallowCard_Click);
+            // 
+            // tpPayPiBtnEjectCard
+            // 
+            this.tpPayPiBtnEjectCard.Location = new System.Drawing.Point(24, 163);
+            this.tpPayPiBtnEjectCard.Name = "tpPayPiBtnEjectCard";
+            this.tpPayPiBtnEjectCard.Size = new System.Drawing.Size(112, 23);
+            this.tpPayPiBtnEjectCard.TabIndex = 15;
+            this.tpPayPiBtnEjectCard.Text = "弹卡";
+            this.tpPayPiBtnEjectCard.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnEjectCard.Click += new System.EventHandler(this.tpPayPiBtnEjectCard_Click);
+            // 
+            // tpPayPiEnterCardTimeout
+            // 
+            this.tpPayPiEnterCardTimeout.Location = new System.Drawing.Point(223, 99);
+            this.tpPayPiEnterCardTimeout.Name = "tpPayPiEnterCardTimeout";
+            this.tpPayPiEnterCardTimeout.Size = new System.Drawing.Size(68, 22);
+            this.tpPayPiEnterCardTimeout.TabIndex = 14;
+            this.tpPayPiEnterCardTimeout.Text = "10";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(21, 103);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(196, 14);
+            this.label65.TabIndex = 13;
+            this.label65.Text = "等待插卡超时时间(秒,10-120)";
+            // 
+            // tpPayPiRtxtLog
+            // 
+            this.tpPayPiRtxtLog.Location = new System.Drawing.Point(24, 197);
+            this.tpPayPiRtxtLog.Name = "tpPayPiRtxtLog";
+            this.tpPayPiRtxtLog.Size = new System.Drawing.Size(506, 94);
+            this.tpPayPiRtxtLog.TabIndex = 12;
+            this.tpPayPiRtxtLog.Text = "";
+            // 
+            // tpPayPiBtnTradeTrans
+            // 
+            this.tpPayPiBtnTradeTrans.Location = new System.Drawing.Point(264, 163);
+            this.tpPayPiBtnTradeTrans.Name = "tpPayPiBtnTradeTrans";
+            this.tpPayPiBtnTradeTrans.Size = new System.Drawing.Size(266, 23);
+            this.tpPayPiBtnTradeTrans.TabIndex = 11;
+            this.tpPayPiBtnTradeTrans.Text = "交易";
+            this.tpPayPiBtnTradeTrans.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnTradeTrans.Click += new System.EventHandler(this.tpPayPiBtnTradeTrans_Click);
+            // 
+            // tpPayPiBtnStartPin
+            // 
+            this.tpPayPiBtnStartPin.Location = new System.Drawing.Point(422, 127);
+            this.tpPayPiBtnStartPin.Name = "tpPayPiBtnStartPin";
+            this.tpPayPiBtnStartPin.Size = new System.Drawing.Size(108, 23);
+            this.tpPayPiBtnStartPin.TabIndex = 10;
+            this.tpPayPiBtnStartPin.Text = "启动密码键盘";
+            this.tpPayPiBtnStartPin.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnStartPin.Click += new System.EventHandler(this.tpPayPiBtnStartPin_Click);
+            // 
+            // tpPayPiBtnEnterAndReadCard
+            // 
+            this.tpPayPiBtnEnterAndReadCard.Location = new System.Drawing.Point(264, 127);
+            this.tpPayPiBtnEnterAndReadCard.Name = "tpPayPiBtnEnterAndReadCard";
+            this.tpPayPiBtnEnterAndReadCard.Size = new System.Drawing.Size(150, 23);
+            this.tpPayPiBtnEnterAndReadCard.TabIndex = 7;
+            this.tpPayPiBtnEnterAndReadCard.Text = "启用进卡及读银行卡";
+            this.tpPayPiBtnEnterAndReadCard.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnEnterAndReadCard.Click += new System.EventHandler(this.tpPayPiBtnEnterAndReadCard_Click);
+            // 
+            // tpPayPiBtnReadCard
+            // 
+            this.tpPayPiBtnReadCard.Location = new System.Drawing.Point(144, 127);
+            this.tpPayPiBtnReadCard.Name = "tpPayPiBtnReadCard";
+            this.tpPayPiBtnReadCard.Size = new System.Drawing.Size(112, 23);
+            this.tpPayPiBtnReadCard.TabIndex = 6;
+            this.tpPayPiBtnReadCard.Text = "读银行卡";
+            this.tpPayPiBtnReadCard.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnReadCard.Click += new System.EventHandler(this.tpPayPiBtnReadCard_Click);
+            // 
+            // tpPayPiBtnEnterCard
+            // 
+            this.tpPayPiBtnEnterCard.Location = new System.Drawing.Point(24, 127);
+            this.tpPayPiBtnEnterCard.Name = "tpPayPiBtnEnterCard";
+            this.tpPayPiBtnEnterCard.Size = new System.Drawing.Size(112, 23);
+            this.tpPayPiBtnEnterCard.TabIndex = 5;
+            this.tpPayPiBtnEnterCard.Text = "启用进卡";
+            this.tpPayPiBtnEnterCard.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnEnterCard.Click += new System.EventHandler(this.tpPayPiBtnEnterCard_Click);
+            // 
+            // tpPayPiBtnInit
+            // 
+            this.tpPayPiBtnInit.Location = new System.Drawing.Point(24, 67);
+            this.tpPayPiBtnInit.Name = "tpPayPiBtnInit";
+            this.tpPayPiBtnInit.Size = new System.Drawing.Size(267, 25);
+            this.tpPayPiBtnInit.TabIndex = 4;
+            this.tpPayPiBtnInit.Text = "初始化";
+            this.tpPayPiBtnInit.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnInit.Click += new System.EventHandler(this.tpPayPiBtnInit_Click);
+            // 
+            // tpPayPiTxtTradeNo
+            // 
+            this.tpPayPiTxtTradeNo.Location = new System.Drawing.Point(300, 30);
+            this.tpPayPiTxtTradeNo.Name = "tpPayPiTxtTradeNo";
+            this.tpPayPiTxtTradeNo.Size = new System.Drawing.Size(230, 22);
+            this.tpPayPiTxtTradeNo.TabIndex = 3;
+            // 
+            // tpPayPiTxtHotelId
+            // 
+            this.tpPayPiTxtHotelId.Location = new System.Drawing.Point(90, 30);
+            this.tpPayPiTxtHotelId.Name = "tpPayPiTxtHotelId";
+            this.tpPayPiTxtHotelId.Size = new System.Drawing.Size(100, 22);
+            this.tpPayPiTxtHotelId.TabIndex = 2;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(21, 35);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(56, 14);
+            this.label64.TabIndex = 1;
+            this.label64.Text = "酒店ID:";
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(207, 35);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(84, 14);
+            this.label63.TabIndex = 0;
+            this.label63.Text = "交易流水号:";
+            // 
+            // tpPayPiLbState
+            // 
+            this.tpPayPiLbState.AutoSize = true;
+            this.tpPayPiLbState.Location = new System.Drawing.Point(145, 32);
+            this.tpPayPiLbState.Name = "tpPayPiLbState";
+            this.tpPayPiLbState.Size = new System.Drawing.Size(49, 14);
+            this.tpPayPiLbState.TabIndex = 26;
+            this.tpPayPiLbState.Text = "State:";
+            // 
+            // tpPayPiBtnCheck
+            // 
+            this.tpPayPiBtnCheck.Location = new System.Drawing.Point(34, 26);
+            this.tpPayPiBtnCheck.Name = "tpPayPiBtnCheck";
+            this.tpPayPiBtnCheck.Size = new System.Drawing.Size(104, 24);
+            this.tpPayPiBtnCheck.TabIndex = 25;
+            this.tpPayPiBtnCheck.Text = "状态检测";
+            this.tpPayPiBtnCheck.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnCheck.Click += new System.EventHandler(this.tpPayPiBtnCheck_Click);
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.tpPayPiPanelProps);
+            this.groupBox24.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox24.Location = new System.Drawing.Point(3, 72);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(336, 375);
+            this.groupBox24.TabIndex = 17;
+            this.groupBox24.TabStop = false;
+            this.groupBox24.Text = "参数";
+            // 
+            // tpPayPiPanelProps
+            // 
+            this.tpPayPiPanelProps.AutoScroll = true;
+            this.tpPayPiPanelProps.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tpPayPiPanelProps.Location = new System.Drawing.Point(3, 18);
+            this.tpPayPiPanelProps.Name = "tpPayPiPanelProps";
+            this.tpPayPiPanelProps.Size = new System.Drawing.Size(330, 354);
+            this.tpPayPiPanelProps.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.tpPayPiBtnSaveConfig);
+            this.panel6.Controls.Add(this.tpPayPiBtnGetConfig);
+            this.panel6.Controls.Add(this.tpPayPiCbBrand);
+            this.panel6.Controls.Add(this.label61);
+            this.panel6.Controls.Add(this.tpPayPiCbModel);
+            this.panel6.Controls.Add(this.label62);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(3, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(975, 69);
+            this.panel6.TabIndex = 16;
+            // 
+            // tpPayPiBtnSaveConfig
+            // 
+            this.tpPayPiBtnSaveConfig.Location = new System.Drawing.Point(796, 22);
+            this.tpPayPiBtnSaveConfig.Name = "tpPayPiBtnSaveConfig";
+            this.tpPayPiBtnSaveConfig.Size = new System.Drawing.Size(108, 23);
+            this.tpPayPiBtnSaveConfig.TabIndex = 6;
+            this.tpPayPiBtnSaveConfig.Text = "保存配置";
+            this.tpPayPiBtnSaveConfig.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnSaveConfig.Click += new System.EventHandler(this.tpPayPiBtnSaveConfig_Click);
+            // 
+            // tpPayPiBtnGetConfig
+            // 
+            this.tpPayPiBtnGetConfig.Location = new System.Drawing.Point(682, 22);
+            this.tpPayPiBtnGetConfig.Name = "tpPayPiBtnGetConfig";
+            this.tpPayPiBtnGetConfig.Size = new System.Drawing.Size(108, 23);
+            this.tpPayPiBtnGetConfig.TabIndex = 5;
+            this.tpPayPiBtnGetConfig.Text = "获取配置";
+            this.tpPayPiBtnGetConfig.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnGetConfig.Click += new System.EventHandler(this.tpPayPiBtnGetConfig_Click);
+            // 
+            // tpPayPiCbBrand
+            // 
+            this.tpPayPiCbBrand.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tpPayPiCbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tpPayPiCbBrand.FormattingEnabled = true;
+            this.tpPayPiCbBrand.ItemHeight = 13;
+            this.tpPayPiCbBrand.Location = new System.Drawing.Point(108, 23);
+            this.tpPayPiCbBrand.Name = "tpPayPiCbBrand";
+            this.tpPayPiCbBrand.Size = new System.Drawing.Size(252, 21);
+            this.tpPayPiCbBrand.TabIndex = 2;
+            this.tpPayPiCbBrand.SelectedIndexChanged += new System.EventHandler(this.tpPayPiCbBrand_SelectedIndexChanged);
+            // 
+            // label61
+            // 
+            this.label61.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(61, 27);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(42, 14);
+            this.label61.TabIndex = 1;
+            this.label61.Text = "品牌:";
+            // 
+            // tpPayPiCbModel
+            // 
+            this.tpPayPiCbModel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tpPayPiCbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tpPayPiCbModel.FormattingEnabled = true;
+            this.tpPayPiCbModel.ItemHeight = 13;
+            this.tpPayPiCbModel.Location = new System.Drawing.Point(425, 23);
+            this.tpPayPiCbModel.Name = "tpPayPiCbModel";
+            this.tpPayPiCbModel.Size = new System.Drawing.Size(252, 21);
+            this.tpPayPiCbModel.TabIndex = 4;
+            this.tpPayPiCbModel.SelectedIndexChanged += new System.EventHandler(this.tpPayPiCbModel_SelectedIndexChanged);
+            // 
+            // label62
+            // 
+            this.label62.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(378, 27);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(42, 14);
+            this.label62.TabIndex = 3;
+            this.label62.Text = "型号:";
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rtbInfoOut);
@@ -2712,90 +3044,24 @@
             this.rtbInfoOut.TabIndex = 0;
             this.rtbInfoOut.Text = "";
             // 
-            // tpPayPi
+            // txHwkitPort
             // 
-            this.tpPayPi.Controls.Add(this.panel6);
-            this.tpPayPi.Location = new System.Drawing.Point(4, 44);
-            this.tpPayPi.Name = "tpPayPi";
-            this.tpPayPi.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPayPi.Size = new System.Drawing.Size(981, 450);
-            this.tpPayPi.TabIndex = 7;
-            this.tpPayPi.Text = "刷卡支付";
-            this.tpPayPi.UseVisualStyleBackColor = true;
+            this.txHwkitPort.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.txHwkitPort.Location = new System.Drawing.Point(520, 36);
+            this.txHwkitPort.Name = "txHwkitPort";
+            this.txHwkitPort.Size = new System.Drawing.Size(88, 22);
+            this.txHwkitPort.TabIndex = 16;
+            this.txHwkitPort.Text = "5000";
             // 
-            // panel6
+            // label66
             // 
-            this.panel6.Controls.Add(this.button1);
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.comboBox1);
-            this.panel6.Controls.Add(this.label61);
-            this.panel6.Controls.Add(this.comboBox2);
-            this.panel6.Controls.Add(this.label62);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(3, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(975, 69);
-            this.panel6.TabIndex = 16;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(786, 22);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "保存配置";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(672, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "获取配置";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ItemHeight = 13;
-            this.comboBox1.Location = new System.Drawing.Point(108, 23);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(252, 21);
-            this.comboBox1.TabIndex = 2;
-            // 
-            // label61
-            // 
-            this.label61.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(61, 27);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(42, 14);
-            this.label61.TabIndex = 1;
-            this.label61.Text = "品牌:";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.ItemHeight = 13;
-            this.comboBox2.Location = new System.Drawing.Point(425, 23);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(252, 21);
-            this.comboBox2.TabIndex = 4;
-            // 
-            // label62
-            // 
-            this.label62.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(378, 27);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(42, 14);
-            this.label62.TabIndex = 3;
-            this.label62.Text = "型号:";
+            this.label66.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(466, 40);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(42, 14);
+            this.label66.TabIndex = 15;
+            this.label66.Text = "端口:";
             // 
             // MainForm
             // 
@@ -2880,10 +3146,15 @@
             this.groupBox19.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.tpPayPi.ResumeLayout(false);
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
+            this.groupBox24.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -3035,7 +3306,7 @@
         private System.Windows.Forms.Panel tpPSBPanelProps;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Button tpPSBBtnSaveConfig;
-        private System.Windows.Forms.Button tpPSBBtnGeConfig;
+        private System.Windows.Forms.Button tpPSBBtnGetConfig;
         private System.Windows.Forms.ComboBox tpPSBCbBrand;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox tpPSBCbModel;
@@ -3123,11 +3394,34 @@
         private System.Windows.Forms.Button tpRoomBtnCancelBackAndRead;
         private System.Windows.Forms.TabPage tpPayPi;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button tpPayPiBtnSaveConfig;
+        private System.Windows.Forms.Button tpPayPiBtnGetConfig;
+        private System.Windows.Forms.ComboBox tpPayPiCbBrand;
         private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox tpPayPiCbModel;
         private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private System.Windows.Forms.Panel tpPayPiPanelProps;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.Label tpPayPiLbState;
+        private System.Windows.Forms.Button tpPayPiBtnCheck;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox tpPayPiTxtTradeNo;
+        private System.Windows.Forms.TextBox tpPayPiTxtHotelId;
+        private System.Windows.Forms.Button tpPayPiBtnInit;
+        private System.Windows.Forms.Button tpPayPiBtnEnterCard;
+        private System.Windows.Forms.Button tpPayPiBtnReadCard;
+        private System.Windows.Forms.Button tpPayPiBtnEnterAndReadCard;
+        private System.Windows.Forms.Button tpPayPiBtnStartPin;
+        private System.Windows.Forms.Button tpPayPiBtnTradeTrans;
+        private System.Windows.Forms.RichTextBox tpPayPiRtxtLog;
+        private System.Windows.Forms.TextBox tpPayPiEnterCardTimeout;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Button tpPayPiBtnSwallowCard;
+        private System.Windows.Forms.Button tpPayPiBtnEjectCard;
+        private System.Windows.Forms.TextBox txHwkitPort;
+        private System.Windows.Forms.Label label66;
     }
 }

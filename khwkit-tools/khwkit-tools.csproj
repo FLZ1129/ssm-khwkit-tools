@@ -111,6 +111,7 @@
     <Compile Include="Beans\CardBox\CardBoxContext.cs" />
     <Compile Include="Beans\IdCard\IdCardInfo.cs" />
     <Compile Include="Beans\IdCard\IDReaderContext.cs" />
+    <Compile Include="Beans\KitEventArg.cs" />
     <Compile Include="Beans\KitHeathState.cs" />
     <Compile Include="Beans\KitServiceItem.cs" />
     <Compile Include="Beans\KitServiceProviderItem.cs" />

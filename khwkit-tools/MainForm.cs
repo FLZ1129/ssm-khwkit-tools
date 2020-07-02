@@ -19,6 +19,11 @@ using khwkit.Beans.TicketPrinter;
 using khwkit.Beans.QRCodeReader;
 using khwkit.Beans.RoomCard;
 using khwkit.Beans.IdCard;
+using System.Threading.Tasks;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace khwkit_tools
 {
@@ -58,7 +63,7 @@ namespace khwkit_tools
         }
         private void btnFetchSummary_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseurl,out _))
             {
                 return;
             }
@@ -195,10 +200,12 @@ namespace khwkit_tools
             return logger;
         }
 
-        private bool TryGetHwKitBaseUrl(out string url)
+        private bool TryGetHwKitBaseUrl(out string httpBaseUrl,out string wsBaseUrl)
         {
-            url = "";
+            httpBaseUrl = "";
+            wsBaseUrl = "";
             var ip = txHwkitIp.Text?.Trim() ?? "";
+            var portStr = txHwkitPort.Text?.Trim() ?? "";
             if (ip.IsEmpty())
             {
                 Utils.Error("请填写外设服务IP地址");
@@ -211,9 +218,22 @@ namespace khwkit_tools
                 txHwkitIp.Focus();
                 return false;
             }
-            url = $"http://{ip}:5000/api";
-            return true;
+            if (portStr.IsEmpty())
+            {
+                Utils.Error("请填写外设服务端口");
+                txHwkitPort.Focus();
+                return false;
+            }
+            if(!int.TryParse(portStr,out int port)|| port <=0 || port>65535)
+            {
+                Utils.Error("外设服务端口格式不正确(1-65535)");
+                txHwkitPort.Focus();
+                return false;
+            }
 
+            httpBaseUrl = $"http://{ip}:{port}/api";
+            wsBaseUrl = $"ws://{ip}:{port+1}/api";
+            return true;
         }
         private async void FetchSummaryAsync(string baseUrl)
         {
@@ -247,7 +267,7 @@ namespace khwkit_tools
         }
         private async void ServiceStateCheck(KitServices service, Label stateLb)
         {
-            if (!TryGetHwKitBaseUrl(out string baseUrl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -434,7 +454,7 @@ namespace khwkit_tools
 
         private async void FetchServiceConfig(KitServices service, ComboBox brand, ComboBox model, Control props)
         {
-            if (!TryGetHwKitBaseUrl(out string baseUrl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
@@ -457,7 +477,7 @@ namespace khwkit_tools
 
         private async void SaveServiceConfig(KitServices service, ComboBox brand, ComboBox model, Control propsControl)
         {
-            if (!TryGetHwKitBaseUrl(out string baseUrl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
@@ -557,7 +577,7 @@ namespace khwkit_tools
 
         private async void tpSystemLedBlink_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
@@ -589,7 +609,7 @@ namespace khwkit_tools
             }
             //var pb = this.ShowProgress("正在发送控制命令......");
             formLogger.Info($"【LED闪烁】LED :{ledNo} ,  频率: {ledHz}HZ ......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/led/blink",
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.System.ApiPathStr()}/led/blink",
                 new JsonObject()
                 {
                     { "ledNo",ledNo},
@@ -601,7 +621,7 @@ namespace khwkit_tools
 
         private async void tpSystemOffLed_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -620,7 +640,7 @@ namespace khwkit_tools
             }
             formLogger.Info($"【关闭LED】LED :{ledNo}  ......");
             //var pb = this.ShowProgress("正在发送控制命令......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/led/off",
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.System.ApiPathStr()}/led/off",
                 new JsonObject()
                 {
                     { "ledNo",ledNo},
@@ -643,7 +663,7 @@ namespace khwkit_tools
         }
         private async void SystemDevPowerCtl(int action)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
@@ -663,7 +683,7 @@ namespace khwkit_tools
             }
             formLogger.Info($"【电源控制】action : {action} , devices : 0x{devToCtl:X2}  ......");
             //var pb = this.ShowProgress("正在发送控制命令......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.System.ApiPathStr()}/power",
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.System.ApiPathStr()}/power",
                 new JsonObject()
                 {
                     { "action",action },
@@ -713,7 +733,7 @@ namespace khwkit_tools
         }
         private async void tpIDReaderReadIDCard_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
@@ -732,19 +752,19 @@ namespace khwkit_tools
             }
             formLogger.Info("【读取身份证】...");
             // var pb = this.ShowProgress("正在发送控制命令......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.IDReader.ApiPathStr()}/read?timeoutSec={timeout}");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.IDReader.ApiPathStr()}/read?timeoutSec={timeout}");
             // pb.Done();
             OutRespLog("【读取身份证】", resp);
         }
         private async void tpIDReaderCancelRead_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl,out _))
             {
                 return;
             }
             formLogger.Info("【取消读取身份证】...");
             //var pb = this.ShowProgress("正在发送取消读取命令......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.IDReader.ApiPathStr()}/cancel_read");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.IDReader.ApiPathStr()}/cancel_read");
             //pb.Done();
             OutRespLog("【取消读取身份证】", resp);
         }
@@ -779,26 +799,26 @@ namespace khwkit_tools
 
         private async void tpCardBoxBtnSendToWrite_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【发卡到写卡位置】...");
             //var pb = this.ShowProgress("发卡到写卡位置......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/send_to_write", new JsonObject());
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/send_to_write", new JsonObject());
             //pb.Done();
             OutRespLog("【发卡到写卡位置】", resp);
         }
 
         private async void tpCardBoxBtnSendToTake_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【发卡到取卡位置】...");
             //var pb = this.ShowProgress("发卡到取卡位置......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/send_to_take", new JsonObject());
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/send_to_take", new JsonObject());
             //pb.Done();
             OutRespLog("【发卡到取卡位置】", resp);
 
@@ -806,20 +826,20 @@ namespace khwkit_tools
 
         private async void tpCardBoxBtnSendToMouth_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【发卡到卡口位置】...");
             //var pb = this.ShowProgress("发卡到卡口位置......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/send_to_mouth", new JsonObject());
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/send_to_mouth", new JsonObject());
             //pb.Done();
             OutRespLog("【发卡到卡口位置】", resp);
         }
 
         private async void tpCardBoxBtnBackToRead_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -838,14 +858,14 @@ namespace khwkit_tools
             }
             formLogger.Info("【收卡到读卡位置】...");
             //var pb = this.ShowProgress("收卡到读卡位置......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/back_to_read?timeoutSec={timeout}", new JsonObject());
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/back_to_read?timeoutSec={timeout}", new JsonObject());
             //pb.Done();
             OutRespLog("【收卡到读卡位置】", resp);
         }
 
         private async void tpCardBoxBtnBackToBox_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -864,45 +884,45 @@ namespace khwkit_tools
             }
             formLogger.Info("【收卡到卡箱】...");
             //var pb = this.ShowProgress("收卡到卡箱......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/back_to_box?timeoutSec={timeout}", new JsonObject());
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/back_to_box?timeoutSec={timeout}", new JsonObject());
             //pb.Done();
             OutRespLog("【收卡到卡箱】", resp);
         }
         private async void tpCardBoxBtnCancelBack_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【取消收卡】...");
             //var pb = this.ShowProgress("取消收卡......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/cancel_back");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/cancel_back");
             //pb.Done();
             OutRespLog("【取消收卡】", resp);
         }
 
         private async void tpCardBoxBtnCheckCardAtTake_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【检测卡片是否取走】...");
             //var pb = this.ShowProgress("检测卡片是否取走......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/is_card_taken");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/is_card_taken");
             //pb.Done();
             OutRespLog("【检测卡片是否取走】", resp);
         }
 
         private async void tpCardBoxBtnCheckCardAtRW_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【检测读写卡位置是否有卡】...");
             //var pb = this.ShowProgress("检测读写卡位置是否有卡......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.CardBox.ApiPathStr()}/is_card_at_read_write");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.CardBox.ApiPathStr()}/is_card_at_read_write");
             //pb.Done();
             OutRespLog("【检测读写卡位置是否有卡】", resp);
         }
@@ -936,7 +956,7 @@ namespace khwkit_tools
         }
         private async void tpPrinterBtnPrint_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -955,7 +975,7 @@ namespace khwkit_tools
             }
             formLogger.Info("【打印小票】...");
             //var pb = this.ShowProgress("打印小票......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseurl}/{KitServices.Printer.ApiPathStr()}/print_ticket", contentJson);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.Printer.ApiPathStr()}/print_ticket", contentJson);
             //pb.Done();
             OutRespLog("【打印小票】", resp);
         }
@@ -989,7 +1009,7 @@ namespace khwkit_tools
         private async void tpQRScannerBtnScan_Click(object sender, EventArgs e)
         {
             tpQRScannerQrContent.Text = "";
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1008,7 +1028,7 @@ namespace khwkit_tools
             }
             formLogger.Info("【扫描二维码】...");
             // var pb = this.ShowProgress("扫描二维码......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<QRCode>>($"{baseurl}/{KitServices.QRScanner.ApiPathStr()}/scan?timeoutSec={timeout}");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<QRCode>>($"{baseUrl}/{KitServices.QRScanner.ApiPathStr()}/scan?timeoutSec={timeout}");
             // pb.Done();
             OutRespLog("【扫描二维码】", resp);
             tpQRScannerQrContent.Text = resp?.Data?.QRCodeContent; 
@@ -1016,13 +1036,13 @@ namespace khwkit_tools
 
         private async void tpQRScannerBtnCancel_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【取消扫描二维码】...");
             //var pb = this.ShowProgress("取消扫描二维码......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.QRScanner.ApiPathStr()}/cancel_scan");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.QRScanner.ApiPathStr()}/cancel_scan");
             //pb.Done();
             OutRespLog("【取消扫描二维码】", resp);
         }
@@ -1056,7 +1076,7 @@ namespace khwkit_tools
 
         private async void tpRoomBtnCardWriteCard_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1076,14 +1096,14 @@ namespace khwkit_tools
             };
             formLogger.Info("【写卡】...");
             // var pb = this.ShowProgress("写卡......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/write", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/write", req);
             // pb.Done();
             OutRespLog("【写卡】", resp);
         }
 
         private async void tpRoomBtnWriteAndSend_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1103,14 +1123,14 @@ namespace khwkit_tools
             };
             formLogger.Info("【写卡及发卡】...");
             // var pb = this.ShowProgress("写卡及发卡......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/write_and_send", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/write_and_send", req);
             // pb.Done();
             OutRespLog("【写卡及发卡】", resp);
         }
 
         private async void tpRoomBtnCopy_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1130,14 +1150,14 @@ namespace khwkit_tools
             };
             formLogger.Info("【复制写卡】...");
             // var pb = this.ShowProgress("复制写卡......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/copy", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/copy", req);
             // pb.Done();
             OutRespLog("【复制写卡】", resp);
         }
 
         private async void tpRoomBtnCopyAndSend_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1157,20 +1177,20 @@ namespace khwkit_tools
             };
             formLogger.Info("【复制写卡及发卡】...");
             // var pb = this.ShowProgress("复制写卡及发卡......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/copy_and_send", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<QRCode>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/copy_and_send", req);
             // pb.Done();
             OutRespLog("【复制写卡及发卡】", resp);
         }
 
         private async void tpRoomBtnRead_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【读卡】...");
             // var pb = this.ShowProgress("读卡......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<RoomCardData>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/read");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<RoomCardData>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/read");
             // pb.Done();
             if(!OutRespLog("【读卡】", resp)) { 
                 return; 
@@ -1191,7 +1211,7 @@ namespace khwkit_tools
             tpRoomCardReadRoomNo.Text = "";
             tpRoomCardTimeStart.Text = "";
             tpRoomCardTimeEnd.Text = "";
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1210,7 +1230,7 @@ namespace khwkit_tools
             }
             formLogger.Info("【收卡及读卡】...");
             // var pb = this.ShowProgress("收卡及读卡......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<RoomCardData>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/back_and_read");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<RoomCardData>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/back_and_read");
             // pb.Done();
             if (!OutRespLog("【收卡及读卡】", resp))
             {
@@ -1228,26 +1248,26 @@ namespace khwkit_tools
         }
         private  async void tpRoomBtnCancelBackAndRead_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【取消收卡及读卡】...");
             //var pb = this.ShowProgress("取消收卡及读卡......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/cancel_back_and_read");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/cancel_back_and_read");
             //pb.Done();
             OutRespLog("【取消收卡及读卡】", resp);
         }
 
         private async void tpRoomBtnClearCard_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【注销卡】...");
             // var pb = this.ShowProgress("注销卡......");
-            var resp = await HttpUtils.SendHttpDelete<BasicResp<object>>($"{baseurl}/{KitServices.RoomCard.ApiPathStr()}/clear");
+            var resp = await HttpUtils.SendHttpDelete<BasicResp<object>>($"{baseUrl}/{KitServices.RoomCard.ApiPathStr()}/clear");
             // pb.Done();
             if (!OutRespLog("【注销卡】", resp))
             {
@@ -1284,13 +1304,13 @@ namespace khwkit_tools
 
         private async void tpPSBBtnInReadID_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
             formLogger.Info("【读取身份证】...");
             // var pb = this.ShowProgress("读取身份证......");
-            var resp = await HttpUtils.SendHttpGet<BasicResp<IdCardInfo>>($"{baseurl}/{KitServices.IDReader.ApiPathStr()}/read?timeoutSec=10");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<IdCardInfo>>($"{baseUrl}/{KitServices.IDReader.ApiPathStr()}/read?timeoutSec=10");
             // pb.Done();
             OutRespLog("【读取身份证】", resp);
             if (resp?.Data == null) { return; }
@@ -1309,7 +1329,7 @@ namespace khwkit_tools
 
         private async void tpPSBBtnIn_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1418,7 +1438,7 @@ namespace khwkit_tools
             };
             formLogger.Info("【入住上传】...");
             // var pb = this.ShowProgress("读取身份证......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<IdCardInfo>>($"{baseurl}/{KitServices.PSB.ApiPathStr()}in", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<IdCardInfo>>($"{baseUrl}/{KitServices.PSB.ApiPathStr()}in", req);
             // pb.Done();
             OutRespLog("【入住上传】", resp);
 
@@ -1427,7 +1447,7 @@ namespace khwkit_tools
 
         private async void tpPSBBtnOut_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1447,14 +1467,14 @@ namespace khwkit_tools
             }
             formLogger.Info("【离店上传】...");
             // var pb = this.ShowProgress("离店上传......");
-            var resp = await HttpUtils.SendHttpDelete<BasicResp<object>>($"{baseurl}/{KitServices.PSB.ApiPathStr()}/out?roomNo={room}&number={idNo}");
+            var resp = await HttpUtils.SendHttpDelete<BasicResp<object>>($"{baseUrl}/{KitServices.PSB.ApiPathStr()}/out?roomNo={room}&number={idNo}");
             // pb.Done();
             OutRespLog("【离店上传】", resp);
         }
 
         private async void tpPSBBtnSwap_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1486,14 +1506,14 @@ namespace khwkit_tools
             };
             formLogger.Info("【换房上传】...");
             // var pb = this.ShowProgress("换房上传......");
-            var resp = await HttpUtils.SendHttpPut<BasicResp<object>>($"{baseurl}/{KitServices.PSB.ApiPathStr()}/swap",req);
+            var resp = await HttpUtils.SendHttpPut<BasicResp<object>>($"{baseUrl}/{KitServices.PSB.ApiPathStr()}/swap",req);
             // pb.Done();
             OutRespLog("【换房上传】", resp);
         }
 
         private async void tpPSBBtnStay_Click(object sender, EventArgs e)
         {
-            if (!TryGetHwKitBaseUrl(out string baseurl))
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
             {
                 return;
             }
@@ -1519,13 +1539,249 @@ namespace khwkit_tools
             };
             formLogger.Info("【续住上传】...");
             // var pb = this.ShowProgress("续住上传......");
-            var resp = await HttpUtils.SendHttpPut<BasicResp<object>>($"{baseurl}/{KitServices.PSB.ApiPathStr()}/stay", req);
+            var resp = await HttpUtils.SendHttpPut<BasicResp<object>>($"{baseUrl}/{KitServices.PSB.ApiPathStr()}/stay", req);
             // pb.Done();
             OutRespLog("【续住上传】", resp);
         }
 
         #endregion
 
+        #region 刷卡支付
+
+        private void tpPayPiCbBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CbBrand_SelectedIndexChanged(KitServices.PayPi, tpPayPiCbBrand, tpPayPiCbModel, tpPayPiPanelProps);
+        }
+
+        private void tpPayPiCbModel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CbModel_SelectedIndexChanged(KitServices.PayPi, tpPayPiCbBrand, tpPayPiCbModel, tpPayPiPanelProps);
+        }
+
+        private void tpPayPiBtnGetConfig_Click(object sender, EventArgs e)
+        {
+            FetchServiceConfig(KitServices.PayPi, tpPayPiCbBrand, tpPayPiCbModel, tpPayPiPanelProps);
+        }
+
+        private void tpPayPiBtnSaveConfig_Click(object sender, EventArgs e)
+        {
+            SaveServiceConfig(KitServices.PayPi, tpPayPiCbBrand, tpPayPiCbModel, tpPayPiPanelProps);
+        }
+
+        private void tpPayPiBtnCheck_Click(object sender, EventArgs e)
+        {
+            ServiceStateCheck(KitServices.PayPi, tpPayPiLbState);
+        }
+        private CancelToken wsCancelToken = new CancelToken();
+        private async void tpPayPiBtnInit_Click(object sender, EventArgs e)
+        {
+            OutPayPiInfo("", true);
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out string wsBaseUrl))
+            {
+                return;
+            }
+            string hoelId = tpPayPiTxtHotelId.Text?.Trim() ?? "";
+            if (hoelId.IsEmpty())
+            {
+                Utils.Error("请填写酒店ID");
+                tpPayPiTxtHotelId.Focus();
+                return;
+            }
+            string tradeNo = tpPayPiTxtTradeNo.Text?.Trim() ?? "";
+            if (tradeNo.IsEmpty())
+            {
+                Utils.Error("请填写交易流水号");
+                tpPayPiTxtTradeNo.Focus();
+                return;
+            }
+            formLogger.Info("【刷卡交易-初始化】...");
+            var req = new JsonObject() {
+                { "projectId",hoelId},
+                { "tradeNo",tradeNo},
+            };
+            wsCancelToken.Reset();
+            StartWsEventHandler(wsBaseUrl, wsCancelToken);
+            // var pb = this.ShowProgress("刷卡交易-初始化......");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/bank_card_init", req);
+            // pb.Done();
+            OutRespLog("【刷卡交易-初始化】", resp);
+        }
+
+        private async void tpPayPiBtnEnterCard_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            string timeoutStr = tpPayPiEnterCardTimeout.Text?.Trim() ?? "";
+            if (timeoutStr.IsEmpty())
+            {
+                Utils.Error("请填写等待插卡超时时间");
+                tpPayPiEnterCardTimeout.Focus();
+                return;
+            }
+            if (!int.TryParse(timeoutStr, out int timeout) || timeout < 0 || timeout > 120)
+            {
+                Utils.Error("请正确填写等待插卡超时时间");
+                tpRoomCardTimeout.Focus();
+                return;
+            }
+            formLogger.Info("【启用进卡】...");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/enter_card?timeoutSec={timeout}",new JsonObject());
+            OutRespLog("【启用进卡】", resp);
+        }
+
+        private async void tpPayPiBtnReadCard_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            string timeoutStr = tpPayPiEnterCardTimeout.Text?.Trim() ?? "";
+            if (timeoutStr.IsEmpty())
+            {
+                Utils.Error("请填写等待插卡超时时间");
+                tpPayPiEnterCardTimeout.Focus();
+                return;
+            }
+            if (!int.TryParse(timeoutStr, out int timeout) || timeout < 0 || timeout > 120)
+            {
+                Utils.Error("请正确填写等待插卡超时时间");
+                tpRoomCardTimeout.Focus();
+                return;
+            }
+            formLogger.Info("【读银行卡】...");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/read_card");
+            if(OutRespLog("【读银行卡】", resp))
+            {
+                OutPayPiInfo($">>>>>\n银行卡信息:{resp.Data.ToJsonString(Formatting.Indented)}");
+            }
+        }
+
+        private async void tpPayPiBtnEnterAndReadCard_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            string timeoutStr = tpPayPiEnterCardTimeout.Text?.Trim() ?? "";
+            if (timeoutStr.IsEmpty())
+            {
+                Utils.Error("请填写等待插卡超时时间");
+                tpPayPiEnterCardTimeout.Focus();
+                return;
+            }
+            if (!int.TryParse(timeoutStr, out int timeout) || timeout < 0 || timeout > 120)
+            {
+                Utils.Error("请正确填写等待插卡超时时间");
+                tpRoomCardTimeout.Focus();
+                return;
+            }
+            formLogger.Info("【启用进卡及读银行卡】...");
+            var resp = await HttpUtils.SendHttpGet<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/enter_and_read_card?timeoutSec={timeout}");
+            if (OutRespLog("【启用进卡及读银行卡】", resp))
+            {
+                OutPayPiInfo($">>>>>\n银行卡信息:{resp.Data.ToJsonString(Formatting.Indented)}");
+            }
+        }
+        private void StartWsEventHandler(string wsBaseUrl, CancelToken cancelToken)
+        {
+            CancellationToken cancellation = new CancellationToken();
+            //链接websocket 接收按键信息
+            Task.Run(async () => {
+                var url = $"{wsBaseUrl}/ws/event_callback";
+                var cli = new ClientWebSocket();
+                formLogger.Info($"websocket connect  to {url} ...");
+                await cli.ConnectAsync(new Uri(url), cancellation);
+                formLogger.Info("websocket connect success");
+                do
+                {
+                    if (cancelToken.IsCanceled())
+                    {
+                        break;
+                    }
+                    var rcvBytes = new byte[4096];
+                    var rcvBuffer = new ArraySegment<byte>(rcvBytes);
+                    WebSocketReceiveResult rcvResult = await cli.ReceiveAsync(rcvBuffer, cancellation);
+                    byte[] msgBytes = rcvBuffer.Skip(rcvBuffer.Offset).Take(rcvResult.Count).ToArray();
+                    string msg = Encoding.UTF8.GetString(msgBytes);
+                    if (msg.TryDeserializeJsonStr<KitEventArg>(out KitEventArg arg))
+                    {
+                        formLogger.Info($"[Event-{arg.EventStr}] from {arg.Source}, msg = {arg.Message} , >> {arg.Data?.ToJsonString()} ");
+                        if (arg.Source == "PayPi")
+                        {
+                            OutPayPiInfo($"[Event-{arg.EventStr}]  msg = {arg.Message} , >> {arg.Data?.ToJsonString()} ");
+                        }
+                    }
+                } while (true);
+            });
+        }
+        private async void tpPayPiBtnStartPin_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            formLogger.Info("【启动密码键盘】...");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/start_pin",new JsonObject());
+            if(!OutRespLog("【启动密码键盘】", resp))
+            {
+                return;
+            }
+            OutPayPiInfo($">>>>>\n密码键盘启动成功，开始监听键盘输入");
+        }
+        private void OutPayPiInfo(string msg,bool clear =false)
+        {
+            this.Invoke((Action) delegate{
+                if (clear)
+                {
+                    tpPayPiRtxtLog.Clear();
+                }
+                tpPayPiRtxtLog.AppendText($"\n{msg}");
+            });
+        }
+
+        private async void tpPayPiBtnTradeTrans_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            formLogger.Info("【刷卡交易处理】...");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/trade_trans", new JsonObject());
+            if (!OutRespLog("【刷卡交易处理】", resp))
+            {
+                return;
+            }
+        }
+        private async void tpPayPiBtnEjectCard_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            formLogger.Info("【弹卡】...");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/eject_card", new JsonObject());
+            if (!OutRespLog("【弹卡】", resp))
+            {
+                return;
+            }
+        }
+
+        private async void tpPayPiBtnSwallowCard_Click(object sender, EventArgs e)
+        {
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out _))
+            {
+                return;
+            }
+            formLogger.Info("【吞卡】...");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/swallow_card", new JsonObject());
+            if (!OutRespLog("【吞卡】", resp))
+            {
+                return;
+            }
+        }
+        #endregion
     }
    
 }

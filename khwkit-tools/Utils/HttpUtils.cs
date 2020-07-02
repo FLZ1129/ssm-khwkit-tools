@@ -41,7 +41,7 @@ namespace CrazySharp.Std
 
         private static readonly HttpClient GlobalClient = new HttpClient(GWebHandler)
         {
-            Timeout = TimeSpan.FromSeconds(30),
+            Timeout = TimeSpan.FromSeconds(180),
         };
 
         static HttpUtils()
