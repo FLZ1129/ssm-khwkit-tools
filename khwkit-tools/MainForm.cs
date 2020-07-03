@@ -1573,7 +1573,8 @@ namespace khwkit_tools
             ServiceStateCheck(KitServices.PayPi, tpPayPiLbState);
         }
         private CancelToken wsCancelToken = new CancelToken();
-        private async void tpPayPiBtnInit_Click(object sender, EventArgs e)
+
+        private async void tpPayPiBtnSetupTrade_Click(object sender, EventArgs e)
         {
             OutPayPiInfo("", true);
             if (!TryGetHwKitBaseUrl(out string baseUrl, out string wsBaseUrl))
@@ -1594,17 +1595,29 @@ namespace khwkit_tools
                 tpPayPiTxtTradeNo.Focus();
                 return;
             }
-            formLogger.Info("【刷卡交易-初始化】...");
+            formLogger.Info("【设置交易参数】...");
             var req = new JsonObject() {
                 { "projectId",hoelId},
                 { "tradeNo",tradeNo},
             };
-            wsCancelToken.Reset();
             StartWsEventHandler(wsBaseUrl, wsCancelToken);
             // var pb = this.ShowProgress("刷卡交易-初始化......");
-            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/bank_card_init", req);
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/setup_trade", req);
             // pb.Done();
-            OutRespLog("【刷卡交易-初始化】", resp);
+            OutRespLog("【设置交易参数】", resp);
+        }
+        private async void tpPayPiBtnInit_Click(object sender, EventArgs e)
+        {
+            OutPayPiInfo("", true);
+            if (!TryGetHwKitBaseUrl(out string baseUrl, out string wsBaseUrl))
+            {
+                return;
+            }
+            formLogger.Info("【银联键盘初始化】...");
+            // var pb = this.ShowProgress("刷卡交易-初始化......");
+            var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/bank_card_init", new JsonObject());
+            // pb.Done();
+            OutRespLog("【银联键盘初始化】", resp);
         }
 
         private async void tpPayPiBtnEnterCard_Click(object sender, EventArgs e)
@@ -1684,15 +1697,20 @@ namespace khwkit_tools
                 OutPayPiInfo($">>>>>\n银行卡信息:{resp.Data.ToJsonString(Formatting.Indented)}");
             }
         }
+        private ClientWebSocket gWsCli = null;
         private void StartWsEventHandler(string wsBaseUrl, CancelToken cancelToken)
         {
-            CancellationToken cancellation = new CancellationToken();
-            //链接websocket 接收按键信息
             Task.Run(async () => {
+                if (gWsCli!=null && gWsCli.State== WebSocketState.Open)
+                {
+                    return;
+                }
+                cancelToken.Reset();
+                CancellationToken cancellation = new CancellationToken();
                 var url = $"{wsBaseUrl}/ws/event_callback";
-                var cli = new ClientWebSocket();
+                gWsCli = new ClientWebSocket();
                 formLogger.Info($"websocket connect  to {url} ...");
-                await cli.ConnectAsync(new Uri(url), cancellation);
+                await gWsCli.ConnectAsync(new Uri(url), cancellation);
                 formLogger.Info("websocket connect success");
                 do
                 {
@@ -1702,7 +1720,7 @@ namespace khwkit_tools
                     }
                     var rcvBytes = new byte[4096];
                     var rcvBuffer = new ArraySegment<byte>(rcvBytes);
-                    WebSocketReceiveResult rcvResult = await cli.ReceiveAsync(rcvBuffer, cancellation);
+                    WebSocketReceiveResult rcvResult = await gWsCli.ReceiveAsync(rcvBuffer, cancellation);
                     byte[] msgBytes = rcvBuffer.Skip(rcvBuffer.Offset).Take(rcvResult.Count).ToArray();
                     string msg = Encoding.UTF8.GetString(msgBytes);
                     if (msg.TryDeserializeJsonStr<KitEventArg>(out KitEventArg arg))
@@ -1714,6 +1732,8 @@ namespace khwkit_tools
                         }
                     }
                 } while (true);
+                await gWsCli.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal close", cancellation);
+                formLogger.Info($"websocket connect  ({url}) closed .");
             });
         }
         private async void tpPayPiBtnStartPin_Click(object sender, EventArgs e)
@@ -1750,6 +1770,7 @@ namespace khwkit_tools
             }
             formLogger.Info("【刷卡交易处理】...");
             var resp = await HttpUtils.SendHttpPost<BasicResp<object>>($"{baseUrl}/{KitServices.PayPi.ApiPathStr()}/trade_trans", new JsonObject());
+            wsCancelToken.Cancel();
             if (!OutRespLog("【刷卡交易处理】", resp))
             {
                 return;

@@ -290,6 +290,7 @@
             this.label62 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rtbInfoOut = new System.Windows.Forms.RichTextBox();
+            this.tpPayPiBtnSetupTrade = new System.Windows.Forms.Button();
             this.gbSummary.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabCtl.SuspendLayout();
@@ -2766,8 +2767,10 @@
             // 
             // groupBox26
             // 
+            this.groupBox26.Controls.Add(this.tpPayPiBtnSetupTrade);
             this.groupBox26.Controls.Add(this.tpPayPiBtnSwallowCard);
             this.groupBox26.Controls.Add(this.tpPayPiBtnEjectCard);
+            this.groupBox26.Controls.Add(this.tpPayPiBtnInit);
             this.groupBox26.Controls.Add(this.tpPayPiEnterCardTimeout);
             this.groupBox26.Controls.Add(this.label65);
             this.groupBox26.Controls.Add(this.tpPayPiRtxtLog);
@@ -2776,7 +2779,6 @@
             this.groupBox26.Controls.Add(this.tpPayPiBtnEnterAndReadCard);
             this.groupBox26.Controls.Add(this.tpPayPiBtnReadCard);
             this.groupBox26.Controls.Add(this.tpPayPiBtnEnterCard);
-            this.groupBox26.Controls.Add(this.tpPayPiBtnInit);
             this.groupBox26.Controls.Add(this.tpPayPiTxtTradeNo);
             this.groupBox26.Controls.Add(this.tpPayPiTxtHotelId);
             this.groupBox26.Controls.Add(this.label64);
@@ -2886,11 +2888,11 @@
             // 
             // tpPayPiBtnInit
             // 
-            this.tpPayPiBtnInit.Location = new System.Drawing.Point(24, 67);
+            this.tpPayPiBtnInit.Location = new System.Drawing.Point(298, 68);
             this.tpPayPiBtnInit.Name = "tpPayPiBtnInit";
-            this.tpPayPiBtnInit.Size = new System.Drawing.Size(267, 25);
+            this.tpPayPiBtnInit.Size = new System.Drawing.Size(232, 25);
             this.tpPayPiBtnInit.TabIndex = 4;
-            this.tpPayPiBtnInit.Text = "初始化";
+            this.tpPayPiBtnInit.Text = "银联键盘初始化";
             this.tpPayPiBtnInit.UseVisualStyleBackColor = true;
             this.tpPayPiBtnInit.Click += new System.EventHandler(this.tpPayPiBtnInit_Click);
             // 
@@ -3063,6 +3065,16 @@
             this.rtbInfoOut.Size = new System.Drawing.Size(989, 125);
             this.rtbInfoOut.TabIndex = 0;
             this.rtbInfoOut.Text = "";
+            // 
+            // tpPayPiBtnSetupTrade
+            // 
+            this.tpPayPiBtnSetupTrade.Location = new System.Drawing.Point(26, 68);
+            this.tpPayPiBtnSetupTrade.Name = "tpPayPiBtnSetupTrade";
+            this.tpPayPiBtnSetupTrade.Size = new System.Drawing.Size(230, 25);
+            this.tpPayPiBtnSetupTrade.TabIndex = 17;
+            this.tpPayPiBtnSetupTrade.Text = "设置交易参数";
+            this.tpPayPiBtnSetupTrade.UseVisualStyleBackColor = true;
+            this.tpPayPiBtnSetupTrade.Click += new System.EventHandler(this.tpPayPiBtnSetupTrade_Click);
             // 
             // MainForm
             // 
@@ -3424,5 +3436,6 @@
         private System.Windows.Forms.Button tpPayPiBtnEjectCard;
         private System.Windows.Forms.TextBox txHwkitPort;
         private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Button tpPayPiBtnSetupTrade;
     }
 }
